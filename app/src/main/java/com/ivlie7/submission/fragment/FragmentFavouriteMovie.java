@@ -80,4 +80,10 @@ public class FragmentFavouriteMovie extends Fragment implements FavouriteMovieVi
     public void dataNotFound() {
         Toast.makeText(getContext(), R.string.data_not_found, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        favouriteMoviePresenter.getFavouriteMovieList(getContext());
+    }
 }

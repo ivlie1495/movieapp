@@ -80,4 +80,10 @@ public class FragmentFavouriteTv extends Fragment implements FavouriteTvView, Sw
     public void dataNotFound() {
         Toast.makeText(getContext(), R.string.data_not_found, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        favouriteTvShowPresenter.getFavouriteTvShowList(getContext());
+    }
 }
