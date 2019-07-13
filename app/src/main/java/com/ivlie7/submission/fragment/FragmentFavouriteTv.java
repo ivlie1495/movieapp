@@ -1,0 +1,83 @@
+package com.ivlie7.submission.fragment;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.ivlie7.submission.R;
+import com.ivlie7.submission.adapter.TvShowAdapter;
+import com.ivlie7.submission.model.TvShow;
+import com.ivlie7.submission.presenter.FavouriteTvShowPresenter;
+import com.ivlie7.submission.view.FavouriteTvView;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class FragmentFavouriteTv extends Fragment implements FavouriteTvView, SwipeRefreshLayout.OnRefreshListener {
+
+    @BindView(R.id.recyclerViewFavouriteTv)
+    RecyclerView recyclerViewFavouriteTv;
+
+    @BindView(R.id.progressBarFavouriteTv)
+    ProgressBar progressBarFavouriteTv;
+
+    @BindView(R.id.swipeRefreshFavouriteTv)
+    SwipeRefreshLayout swipeRefreshFavouriteTv;
+
+    FavouriteTvShowPresenter favouriteTvShowPresenter;
+    TvShowAdapter tvShowAdapter;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_favourite_tv, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
+
+        favouriteTvShowPresenter = new FavouriteTvShowPresenter(this);
+        favouriteTvShowPresenter.getFavouriteTvShowList(getContext());
+
+        swipeRefreshFavouriteTv.setOnRefreshListener(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        swipeRefreshFavouriteTv.setRefreshing(false);
+        favouriteTvShowPresenter.getFavouriteTvShowList(getContext());
+        progressBarFavouriteTv.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showLoading() {
+        progressBarFavouriteTv.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        progressBarFavouriteTv.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void getTvShowList(List<TvShow> tvShowList) {
+        tvShowAdapter = new TvShowAdapter(tvShowList, getContext());
+        recyclerViewFavouriteTv.setAdapter(tvShowAdapter);
+    }
+
+    @Override
+    public void dataNotFound() {
+        Toast.makeText(getContext(), R.string.data_not_found, Toast.LENGTH_SHORT).show();
+    }
+}

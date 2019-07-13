@@ -1,0 +1,47 @@
+package com.ivlie7.submission.presenter;
+
+import com.ivlie7.submission.config.ApiConfig;
+import com.ivlie7.submission.model.Movie;
+import com.ivlie7.submission.model.MovieResponse;
+import com.ivlie7.submission.view.MovieView;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MoviePresenter {
+
+    private MovieView movieView;
+    private String language;
+
+    public MoviePresenter(MovieView movieView, String language) {
+        this.movieView = movieView;
+        this.language = language;
+    }
+
+    public void getMovieList() {
+        ApiConfig apiConfig = new ApiConfig(language);
+        Call<MovieResponse> apiService = apiConfig.getService().getListMovie();
+
+        movieView.showLoading();
+        apiService.enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                movieView.hideLoading();
+                if (response.body() != null) {
+                    List<Movie> movieList = response.body().getGetMovieList();
+                    movieView.getMovieList(movieList);
+                } else {
+                    movieView.dataNotFound();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+                movieView.hideLoading();
+            }
+        });
+    }
+}

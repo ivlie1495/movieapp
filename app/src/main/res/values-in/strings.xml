@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="movie" translatable="false">Film</string>
+    <string name="tv_show" translatable="false">Serial Tv</string>
+    <string name="title" translatable="false">Judul</string>
+    <string name="release" translatable="false">Tanggal Rilis</string>
+    <string name="score" translatable="false">Nilai</string>
+    <string name="overview" translatable="false">Sinopsis</string>
+    <string name="language" translatable="false">Bahasa</string>
+    <string name="set_language" translatable="false">in-ID</string>
+    <string name="data_not_found" translatable="false">Data Kosong!</string>
+    <string name="favourite" translatable="false">Favorit</string>
+</resources>

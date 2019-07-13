@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigationMovie"
+        android:icon="@drawable/icon_movie"
+        android:title="@string/movie"
+        />
+
+    <item
+        android:id="@+id/navigationTV"
+        android:icon="@drawable/icon_tv"
+        android:title="@string/tv_show"
+        />
+
+    <item
+        android:id="@+id/navigationFavorite"
+        android:icon="@drawable/icon_favourite"
+        android:title="@string/favourite"
+        />
+
+</menu>

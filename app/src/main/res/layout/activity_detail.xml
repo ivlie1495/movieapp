@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DetailActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ivMovie"
+        style="@style/ConfigWidthHeight"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageViewBackdropDetail"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:contentDescription="@string/poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/poster_a_start_is_born" />
+
+        <ImageView
+            android:id="@+id/imageViewPosterDetail"
+            android:layout_width="108dp"
+            android:layout_height="148dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="132dp"
+            android:contentDescription="@string/poster"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/poster_a_start_is_born" />
+
+        <TextView
+            android:id="@+id/textViewTitleDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/title"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewPosterDetail"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewBackdropDetail"
+            app:layout_constrainedWidth="true"/>
+
+        <TextView
+            android:id="@+id/textViewReleaseDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="236dp"
+            android:text="@string/release"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewPosterDetail"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitleDetail" />
+
+        <TextView
+            android:id="@+id/textViewRatingDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="236dp"
+            android:text="@string/score"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageViewPosterDetail"
+            app:layout_constraintTop_toBottomOf="@+id/textViewReleaseDetail" />
+
+        <TextView
+            android:id="@+id/textViewOverviewDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="292dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/overview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageViewBackdropDetail" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
