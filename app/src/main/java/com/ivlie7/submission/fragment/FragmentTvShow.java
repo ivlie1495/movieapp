@@ -63,7 +63,7 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
             if (outStateTvShowList != null) {
                 tvShowAdapter = new TvShowAdapter(outStateTvShowList, getContext());
                 recyclerView.setAdapter(tvShowAdapter);
-                tvShows.addAll(outStateTvShowList);
+                tvShows = outStateTvShowList;
             }
         }
 
@@ -87,8 +87,7 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
     @Override
     public void getTvShowList(List<TvShow> tvShowList) {
         if (tvShowList != null) {
-            tvShows.clear();
-            tvShows.addAll(tvShowList);
+            tvShows = tvShowList;
             tvShowAdapter = new TvShowAdapter(tvShows, getContext());
             recyclerView.setAdapter(tvShowAdapter);
         }
