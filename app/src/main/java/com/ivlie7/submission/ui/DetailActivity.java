@@ -1,5 +1,6 @@
 package com.ivlie7.submission.ui;
 
+import android.R.id;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -93,7 +94,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
+            case id.home:
                 this.onBackPressed();
                 break;
             case R.id.action_favourite:
