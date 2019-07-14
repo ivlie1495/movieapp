@@ -1,10 +1,13 @@
 package com.ivlie7.submission.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailActivity extends AppCompatActivity {
+
+    @BindView(R.id.progressBarDetail)
+    ProgressBar progressBarDetail;
 
     @BindView(R.id.imageViewBackdropDetail)
     ImageView imageViewBackdropDetail;
@@ -50,25 +56,30 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
-        getDataFromIntent();
-
-        textViewTitleDetail.setText(isMovie() ? movie.getTitle() : tvShow.getName());
-        textViewReleaseDetail.setText(isMovie() ? movie.getReleaseDate() : tvShow.getFirstAirDate());
-        textViewRatingDetail.setText(String.valueOf(isMovie() ? movie.getVoteAverage() : tvShow.getVoteAverage()));
-        textViewOverviewDetail.setText(isMovie() ? movie.getOverview() : tvShow.getOverview());
-        Glide.with(this)
-                .load(ApiUtils.API_BACKDROP + (isMovie() ? movie.getBackdropPath() : tvShow.getBackdropPath()))
-                .into(imageViewBackdropDetail);
-        Glide.with(this)
-                .load(ApiUtils.API_POSTER + (isMovie() ? movie.getPosterPath() : tvShow.getPosterPath()))
-                .into(imageViewPosterDetail);
-
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
+        showProgressBar();
+        getDataFromIntent();
+        getDataDetail();
         favouriteState();
+    }
+
+    public void getDataDetail() {
+        if (movie != null || tvShow != null) {
+            textViewTitleDetail.setText(isMovie() ? movie.getTitle() : tvShow.getName());
+            textViewReleaseDetail.setText(isMovie() ? movie.getReleaseDate() : tvShow.getFirstAirDate());
+            textViewRatingDetail.setText(String.valueOf(isMovie() ? movie.getVoteAverage() : tvShow.getVoteAverage()));
+            textViewOverviewDetail.setText(isMovie() ? movie.getOverview() : tvShow.getOverview());
+            Glide.with(this)
+                    .load(ApiUtils.API_BACKDROP + (isMovie() ? movie.getBackdropPath() : tvShow.getBackdropPath()))
+                    .into(imageViewBackdropDetail);
+            Glide.with(this)
+                    .load(ApiUtils.API_POSTER + (isMovie() ? movie.getPosterPath() : tvShow.getPosterPath()))
+                    .into(imageViewPosterDetail);
+        }
     }
 
     @Override
@@ -139,5 +150,15 @@ public class DetailActivity extends AppCompatActivity {
 
     public boolean isMovie() {
         return getIntent().getBooleanExtra("isMovie", true);
+    }
+
+    public void showProgressBar() {
+        progressBarDetail.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressBarDetail.setVisibility(View.INVISIBLE);
+            }
+        }, 2000);
     }
 }
