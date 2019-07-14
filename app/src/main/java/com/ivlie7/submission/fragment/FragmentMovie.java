@@ -86,6 +86,7 @@ public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLa
     @Override
     public void getMovieList(List<Movie> movieList) {
         if (movieList != null) {
+            movies.clear();
             movies.addAll(movieList);
             movieAdapter = new MovieAdapter(movies, getContext());
             recyclerViewMovie.setAdapter(movieAdapter);
@@ -102,5 +103,12 @@ public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLa
         swipeRefreshMovie.setRefreshing(false);
         moviePresenter.getMovieList(movies);
         progressBarMovie.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        movieAdapter = new MovieAdapter(movies, getContext());
+        recyclerViewMovie.setAdapter(movieAdapter);
     }
 }
