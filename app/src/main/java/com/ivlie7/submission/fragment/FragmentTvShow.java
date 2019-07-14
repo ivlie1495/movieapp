@@ -26,14 +26,14 @@ import butterknife.ButterKnife;
 
 public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.progressBarTv)
-    ProgressBar progressBarTv;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
-    @BindView(R.id.recyclerViewTv)
-    RecyclerView recyclerViewTv;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
-    @BindView(R.id.swipeRefreshTv)
-    SwipeRefreshLayout swipeRefreshTv;
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefresh;
 
     private TvShowPresenter tvShowPresenter;
     private TvShowAdapter tvShowAdapter;
@@ -42,7 +42,7 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_tv_show, container, false);
+        return inflater.inflate(R.layout.fragment_data, container, false);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
             List<TvShow> outStateTvShowList =savedInstanceState.getParcelableArrayList(getString(R.string.data));
             if (outStateTvShowList != null) {
                 tvShowAdapter = new TvShowAdapter(outStateTvShowList, getContext());
-                recyclerViewTv.setAdapter(tvShowAdapter);
+                recyclerView.setAdapter(tvShowAdapter);
                 tvShows.addAll(outStateTvShowList);
             }
         }
@@ -70,17 +70,18 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
         tvShowPresenter = new TvShowPresenter(this, getString(R.string.set_language));
         tvShowPresenter.getTvShowList(tvShows);
 
-        swipeRefreshTv.setOnRefreshListener(this);
+        swipeRefresh.setOnRefreshListener(this);
     }
 
     @Override
     public void showLoading() {
-        progressBarTv.setVisibility(View.VISIBLE);
+        recyclerView.setAdapter(null);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        progressBarTv.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -89,7 +90,7 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
             tvShows.clear();
             tvShows.addAll(tvShowList);
             tvShowAdapter = new TvShowAdapter(tvShows, getContext());
-            recyclerViewTv.setAdapter(tvShowAdapter);
+            recyclerView.setAdapter(tvShowAdapter);
         }
     }
 
@@ -100,8 +101,8 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
 
     @Override
     public void onRefresh() {
-        swipeRefreshTv.setRefreshing(false);
+        swipeRefresh.setRefreshing(false);
         tvShowPresenter.getTvShowList(tvShows);
-        progressBarTv.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

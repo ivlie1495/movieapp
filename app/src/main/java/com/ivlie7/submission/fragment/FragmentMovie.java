@@ -26,23 +26,23 @@ import butterknife.ButterKnife;
 
 public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.recyclerViewMovie)
-    RecyclerView recyclerViewMovie;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
-    @BindView(R.id.progressBarMovie)
-    ProgressBar progressBarMovie;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
-    @BindView(R.id.swipeRefreshMovie)
-    SwipeRefreshLayout swipeRefreshMovie;
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefresh;
 
     private MoviePresenter moviePresenter;
     private MovieAdapter movieAdapter;
 
-    private final List<Movie> movies = new ArrayList<>();
+    private List<Movie> movies = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_movie, container, false);
+        return inflater.inflate(R.layout.fragment_data, container, false);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLa
             List<Movie> outStateMovieList =savedInstanceState.getParcelableArrayList(getString(R.string.data));
             if (outStateMovieList != null) {
                 movieAdapter = new MovieAdapter(outStateMovieList, getContext());
-                recyclerViewMovie.setAdapter(movieAdapter);
+                recyclerView.setAdapter(movieAdapter);
                 movies.addAll(outStateMovieList);
             }
         }
@@ -70,17 +70,18 @@ public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLa
         moviePresenter = new MoviePresenter(this, getString(R.string.set_language));
         moviePresenter.getMovieList(movies);
 
-        swipeRefreshMovie.setOnRefreshListener(this);
+        swipeRefresh.setOnRefreshListener(this);
     }
 
     @Override
     public void showLoading() {
-        progressBarMovie.setVisibility(View.VISIBLE);
+        recyclerView.setAdapter(null);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        progressBarMovie.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -89,7 +90,7 @@ public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLa
             movies.clear();
             movies.addAll(movieList);
             movieAdapter = new MovieAdapter(movies, getContext());
-            recyclerViewMovie.setAdapter(movieAdapter);
+            recyclerView.setAdapter(movieAdapter);
         }
     }
 
@@ -100,8 +101,8 @@ public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLa
 
     @Override
     public void onRefresh() {
-        swipeRefreshMovie.setRefreshing(false);
+        swipeRefresh.setRefreshing(false);
         moviePresenter.getMovieList(movies);
-        progressBarMovie.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 }

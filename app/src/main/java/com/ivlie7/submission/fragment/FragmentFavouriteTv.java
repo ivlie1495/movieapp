@@ -25,21 +25,20 @@ import butterknife.ButterKnife;
 
 public class FragmentFavouriteTv extends Fragment implements TvShowView, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.recyclerViewFavouriteTv)
-    RecyclerView recyclerViewFavouriteTv;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
-    @BindView(R.id.progressBarFavouriteTv)
-    ProgressBar progressBarFavouriteTv;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
-    @BindView(R.id.swipeRefreshFavouriteTv)
-    SwipeRefreshLayout swipeRefreshFavouriteTv;
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefresh;
 
-    TvShowPresenter favouriteTvShowPresenter;
-    TvShowAdapter tvShowAdapter;
+    private TvShowPresenter favouriteTvShowPresenter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_favourite_tv, container, false);
+        return inflater.inflate(R.layout.fragment_data, container, false);
     }
 
     @Override
@@ -50,30 +49,30 @@ public class FragmentFavouriteTv extends Fragment implements TvShowView, SwipeRe
         favouriteTvShowPresenter = new TvShowPresenter(this);
         favouriteTvShowPresenter.getFavouriteTvShowList(getContext());
 
-        swipeRefreshFavouriteTv.setOnRefreshListener(this);
+        swipeRefresh.setOnRefreshListener(this);
     }
 
     @Override
     public void onRefresh() {
-        swipeRefreshFavouriteTv.setRefreshing(false);
+        swipeRefresh.setRefreshing(false);
         favouriteTvShowPresenter.getFavouriteTvShowList(getContext());
-        progressBarFavouriteTv.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showLoading() {
-        progressBarFavouriteTv.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        progressBarFavouriteTv.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void getTvShowList(List<TvShow> tvShowList) {
-        tvShowAdapter = new TvShowAdapter(tvShowList, getContext());
-        recyclerViewFavouriteTv.setAdapter(tvShowAdapter);
+        TvShowAdapter tvShowAdapter = new TvShowAdapter(tvShowList, getContext());
+        recyclerView.setAdapter(tvShowAdapter);
     }
 
     @Override

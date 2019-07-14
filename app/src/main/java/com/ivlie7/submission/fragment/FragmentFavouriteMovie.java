@@ -25,21 +25,20 @@ import butterknife.ButterKnife;
 
 public class FragmentFavouriteMovie extends Fragment implements MovieView, SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.recyclerViewFavouriteMovie)
-    RecyclerView recyclerViewFavouriteMovie;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
 
-    @BindView(R.id.progressBarFavouriteMovie)
-    ProgressBar progressBarFavouriteMovie;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
-    @BindView(R.id.swipeRefreshFavouriteMovie)
-    SwipeRefreshLayout swipeRefreshFavouriteMovie;
+    @BindView(R.id.swipeRefresh)
+    SwipeRefreshLayout swipeRefresh;
 
-    MoviePresenter favouriteMoviePresenter;
-    MovieAdapter movieAdapter;
+    private MoviePresenter favouriteMoviePresenter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_favourite_movie, container, false);
+        return inflater.inflate(R.layout.fragment_data, container, false);
     }
 
     @Override
@@ -50,30 +49,30 @@ public class FragmentFavouriteMovie extends Fragment implements MovieView, Swipe
         favouriteMoviePresenter = new MoviePresenter(this);
         favouriteMoviePresenter.getFavouriteMovieList(getContext());
 
-        swipeRefreshFavouriteMovie.setOnRefreshListener(this);
+        swipeRefresh.setOnRefreshListener(this);
     }
 
     @Override
     public void onRefresh() {
-        swipeRefreshFavouriteMovie.setRefreshing(false);
+        swipeRefresh.setRefreshing(false);
         favouriteMoviePresenter.getFavouriteMovieList(getContext());
-        progressBarFavouriteMovie.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showLoading() {
-        progressBarFavouriteMovie.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-        progressBarFavouriteMovie.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void getMovieList(List<Movie> movieList) {
-        movieAdapter = new MovieAdapter(movieList, getContext());
-        recyclerViewFavouriteMovie.setAdapter(movieAdapter);
+        MovieAdapter movieAdapter = new MovieAdapter(movieList, getContext());
+        recyclerView.setAdapter(movieAdapter);
     }
 
     @Override
