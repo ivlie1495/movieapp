@@ -104,11 +104,4 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
         tvShowPresenter.getTvShowList(tvShows);
         progressBarTv.setVisibility(View.INVISIBLE);
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        tvShowAdapter = new TvShowAdapter(tvShows, getContext());
-        recyclerViewTv.setAdapter(tvShowAdapter);
-    }
 }

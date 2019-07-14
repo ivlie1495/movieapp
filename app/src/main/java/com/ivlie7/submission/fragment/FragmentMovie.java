@@ -104,11 +104,4 @@ public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLa
         moviePresenter.getMovieList(movies);
         progressBarMovie.setVisibility(View.INVISIBLE);
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        movieAdapter = new MovieAdapter(movies, getContext());
-        recyclerViewMovie.setAdapter(movieAdapter);
-    }
 }
