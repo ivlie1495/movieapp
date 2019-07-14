@@ -1,6 +1,9 @@
 package com.ivlie7.submission.presenter;
 
+import android.content.Context;
+
 import com.ivlie7.submission.config.ApiConfig;
+import com.ivlie7.submission.config.RoomConfig;
 import com.ivlie7.submission.model.TvShow;
 import com.ivlie7.submission.model.TvShowResponse;
 import com.ivlie7.submission.view.TvShowView;
@@ -15,6 +18,10 @@ public class TvShowPresenter {
 
     private TvShowView tvShowView;
     private String language;
+
+    public TvShowPresenter(TvShowView tvShowView) {
+        this.tvShowView = tvShowView;
+    }
 
     public TvShowPresenter(TvShowView tvShowView, String language) {
         this.tvShowView = tvShowView;
@@ -43,5 +50,16 @@ public class TvShowPresenter {
                 tvShowView.hideLoading();
             }
         });
+    }
+
+    public void getFavouriteTvShowList(Context context) {
+        tvShowView.showLoading();
+        List<TvShow> favouriteTvList = RoomConfig.getInstance(context.getApplicationContext()).tvShowDao().getFavouriteTvShow();
+        if (favouriteTvList != null) {
+            tvShowView.getTvShowList(favouriteTvList);
+            tvShowView.hideLoading();
+        } else {
+            tvShowView.dataNotFound();
+        }
     }
 }

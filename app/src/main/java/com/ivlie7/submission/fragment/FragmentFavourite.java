@@ -25,7 +25,7 @@ public class FragmentFavourite extends Fragment {
     ViewPager viewPagerFavourite;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_favourite, container, false);
     }
 
@@ -39,7 +39,7 @@ public class FragmentFavourite extends Fragment {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerFavouriteAdapter adapter = new ViewPagerFavouriteAdapter(getFragmentManager());
+        ViewPagerFavouriteAdapter adapter = new ViewPagerFavouriteAdapter(getChildFragmentManager());
         adapter.addTabFragment(new FragmentFavouriteMovie(), getString(R.string.movie));
         adapter.addTabFragment(new FragmentFavouriteTv(), getString(R.string.tv_show));
         viewPager.setAdapter(adapter);

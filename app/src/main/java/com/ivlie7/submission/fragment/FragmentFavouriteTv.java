@@ -15,15 +15,15 @@ import android.widget.Toast;
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.adapter.TvShowAdapter;
 import com.ivlie7.submission.model.TvShow;
-import com.ivlie7.submission.presenter.FavouriteTvShowPresenter;
-import com.ivlie7.submission.view.FavouriteTvView;
+import com.ivlie7.submission.presenter.TvShowPresenter;
+import com.ivlie7.submission.view.TvShowView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FragmentFavouriteTv extends Fragment implements FavouriteTvView, SwipeRefreshLayout.OnRefreshListener {
+public class FragmentFavouriteTv extends Fragment implements TvShowView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.recyclerViewFavouriteTv)
     RecyclerView recyclerViewFavouriteTv;
@@ -34,11 +34,11 @@ public class FragmentFavouriteTv extends Fragment implements FavouriteTvView, Sw
     @BindView(R.id.swipeRefreshFavouriteTv)
     SwipeRefreshLayout swipeRefreshFavouriteTv;
 
-    FavouriteTvShowPresenter favouriteTvShowPresenter;
+    TvShowPresenter favouriteTvShowPresenter;
     TvShowAdapter tvShowAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_favourite_tv, container, false);
     }
 
@@ -47,7 +47,7 @@ public class FragmentFavouriteTv extends Fragment implements FavouriteTvView, Sw
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        favouriteTvShowPresenter = new FavouriteTvShowPresenter(this);
+        favouriteTvShowPresenter = new TvShowPresenter(this);
         favouriteTvShowPresenter.getFavouriteTvShowList(getContext());
 
         swipeRefreshFavouriteTv.setOnRefreshListener(this);

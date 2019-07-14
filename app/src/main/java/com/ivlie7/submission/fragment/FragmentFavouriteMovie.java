@@ -15,15 +15,15 @@ import android.widget.Toast;
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.adapter.MovieAdapter;
 import com.ivlie7.submission.model.Movie;
-import com.ivlie7.submission.presenter.FavouriteMoviePresenter;
-import com.ivlie7.submission.view.FavouriteMovieView;
+import com.ivlie7.submission.presenter.MoviePresenter;
+import com.ivlie7.submission.view.MovieView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FragmentFavouriteMovie extends Fragment implements FavouriteMovieView, SwipeRefreshLayout.OnRefreshListener {
+public class FragmentFavouriteMovie extends Fragment implements MovieView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.recyclerViewFavouriteMovie)
     RecyclerView recyclerViewFavouriteMovie;
@@ -34,11 +34,11 @@ public class FragmentFavouriteMovie extends Fragment implements FavouriteMovieVi
     @BindView(R.id.swipeRefreshFavouriteMovie)
     SwipeRefreshLayout swipeRefreshFavouriteMovie;
 
-    FavouriteMoviePresenter favouriteMoviePresenter;
+    MoviePresenter favouriteMoviePresenter;
     MovieAdapter movieAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_favourite_movie, container, false);
     }
 
@@ -47,7 +47,7 @@ public class FragmentFavouriteMovie extends Fragment implements FavouriteMovieVi
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        favouriteMoviePresenter = new FavouriteMoviePresenter(this);
+        favouriteMoviePresenter = new MoviePresenter(this);
         favouriteMoviePresenter.getFavouriteMovieList(getContext());
 
         swipeRefreshFavouriteMovie.setOnRefreshListener(this);

@@ -1,6 +1,9 @@
 package com.ivlie7.submission.presenter;
 
+import android.content.Context;
+
 import com.ivlie7.submission.config.ApiConfig;
+import com.ivlie7.submission.config.RoomConfig;
 import com.ivlie7.submission.model.Movie;
 import com.ivlie7.submission.model.MovieResponse;
 import com.ivlie7.submission.view.MovieView;
@@ -15,6 +18,10 @@ public class MoviePresenter {
 
     private MovieView movieView;
     private String language;
+
+    public MoviePresenter(MovieView movieView) {
+        this.movieView = movieView;
+    }
 
     public MoviePresenter(MovieView movieView, String language) {
         this.movieView = movieView;
@@ -43,5 +50,16 @@ public class MoviePresenter {
                 movieView.hideLoading();
             }
         });
+    }
+
+    public void getFavouriteMovieList(Context context) {
+        movieView.showLoading();
+        List<Movie> favouriteMovieList = RoomConfig.getInstance(context.getApplicationContext()).movieDao().getFavouriteMovie();
+        if (favouriteMovieList != null) {
+            movieView.getMovieList(favouriteMovieList);
+            movieView.hideLoading();
+        } else {
+            movieView.dataNotFound();
+        }
     }
 }
