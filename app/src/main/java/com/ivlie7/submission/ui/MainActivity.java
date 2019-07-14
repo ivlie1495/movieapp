@@ -105,10 +105,4 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public void onPageScrollStateChanged(int i) {
 
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        bottomNavigation.setSelectedItemId(R.id.navigationMovie);
-    }
 }
