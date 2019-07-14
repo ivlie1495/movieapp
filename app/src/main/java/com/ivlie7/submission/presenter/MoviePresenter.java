@@ -28,7 +28,7 @@ public class MoviePresenter {
         this.language = language;
     }
 
-    public void getMovieList() {
+    public void getMovieList(final List<Movie> movies) {
         ApiConfig apiConfig = new ApiConfig(language);
         Call<MovieResponse> apiService = apiConfig.getService().getListMovie();
 
@@ -48,6 +48,9 @@ public class MoviePresenter {
             @Override
             public void onFailure(Call<MovieResponse> call, Throwable t) {
                 movieView.hideLoading();
+                if (movies != null) {
+                    movieView.getMovieList(movies);
+                }
             }
         });
     }

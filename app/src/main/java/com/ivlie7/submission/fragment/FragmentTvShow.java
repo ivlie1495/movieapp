@@ -18,6 +18,7 @@ import com.ivlie7.submission.model.TvShow;
 import com.ivlie7.submission.presenter.TvShowPresenter;
 import com.ivlie7.submission.view.TvShowView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,8 +35,10 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
     @BindView(R.id.swipeRefreshTv)
     SwipeRefreshLayout swipeRefreshTv;
 
-    TvShowPresenter tvShowPresenter;
-    TvShowAdapter tvShowAdapter;
+    private TvShowPresenter tvShowPresenter;
+    private TvShowAdapter tvShowAdapter;
+
+    private List<TvShow> tvShows = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,12 +46,29 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (tvShows != null) {
+            outState.putParcelableArrayList(getString(R.string.data), new ArrayList<>(tvShows));
+        }
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
+        if (savedInstanceState != null) {
+            List<TvShow> outStateTvShowList =savedInstanceState.getParcelableArrayList(getString(R.string.data));
+            if (outStateTvShowList != null) {
+                tvShowAdapter = new TvShowAdapter(outStateTvShowList, getContext());
+                recyclerViewTv.setAdapter(tvShowAdapter);
+                tvShows.addAll(outStateTvShowList);
+            }
+        }
+
         tvShowPresenter = new TvShowPresenter(this, getString(R.string.set_language));
-        tvShowPresenter.getTvShowList();
+        tvShowPresenter.getTvShowList(tvShows);
 
         swipeRefreshTv.setOnRefreshListener(this);
     }
@@ -65,8 +85,11 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
 
     @Override
     public void getTvShowList(List<TvShow> tvShowList) {
-        tvShowAdapter = new TvShowAdapter(tvShowList, getContext());
-        recyclerViewTv.setAdapter(tvShowAdapter);
+        if (tvShowList != null) {
+            tvShows.addAll(tvShowList);
+            tvShowAdapter = new TvShowAdapter(tvShows, getContext());
+            recyclerViewTv.setAdapter(tvShowAdapter);
+        }
     }
 
     @Override
@@ -77,7 +100,7 @@ public class FragmentTvShow extends Fragment implements TvShowView, SwipeRefresh
     @Override
     public void onRefresh() {
         swipeRefreshTv.setRefreshing(false);
-        tvShowPresenter.getTvShowList();
+        tvShowPresenter.getTvShowList(tvShows);
         progressBarTv.setVisibility(View.INVISIBLE);
     }
 }

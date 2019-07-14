@@ -9,8 +9,8 @@ import java.util.List;
 
 public class ViewPagerFavouriteAdapter extends FragmentPagerAdapter {
 
-    private final List<Fragment> fragmentList = new ArrayList<>();
-    private final List<String> fragmentTitleList = new ArrayList<>();
+    private List<Fragment> fragmentList = new ArrayList<>();
+    private List<String> fragmentTitleList = new ArrayList<>();
 
     public ViewPagerFavouriteAdapter(FragmentManager fm) {
         super(fm);
@@ -29,6 +29,10 @@ public class ViewPagerFavouriteAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         return fragmentTitleList.get(position);
+    }
+
+    public void addBotFragment(Fragment fragment) {
+        fragmentList.add(fragment);
     }
 
     public void addTabFragment(Fragment fragment, String title) {

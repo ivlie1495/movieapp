@@ -5,12 +5,13 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ivlie7.submission.R;
+import com.ivlie7.submission.adapter.ViewPagerFavouriteAdapter;
 import com.ivlie7.submission.fragment.FragmentFavourite;
 import com.ivlie7.submission.fragment.FragmentMovie;
 import com.ivlie7.submission.fragment.FragmentTvShow;
@@ -18,23 +19,28 @@ import com.ivlie7.submission.fragment.FragmentTvShow;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     @BindView(R.id.bottomNavigation)
     BottomNavigationView bottomNavigation;
+
+    @BindView(R.id.viewPagerBot)
+    ViewPager viewPagerBot;
+
+    private MenuItem menuItem;
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.navigationMovie:
-                    loadFragment(new FragmentMovie());
+                    viewPagerBot.setCurrentItem(0);
                     return true;
                 case R.id.navigationTV:
-                    loadFragment(new FragmentTvShow());
+                    viewPagerBot.setCurrentItem(1);
                     return true;
                 case R.id.navigationFavorite:
-                    loadFragment(new FragmentFavourite());
+                    viewPagerBot.setCurrentItem(2);
                     return true;
             }
             return false;
@@ -51,12 +57,17 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             bottomNavigation.setSelectedItemId(R.id.navigationMovie);
         }
+
+        viewPagerBot.addOnPageChangeListener(this);
+        setupViewPager(viewPagerBot);
     }
 
-    private void loadFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.layoutContainer, fragment, fragment.getClass().getSimpleName())
-                .commit();
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerFavouriteAdapter adapter = new ViewPagerFavouriteAdapter(getSupportFragmentManager());
+        adapter.addBotFragment(new FragmentMovie());
+        adapter.addBotFragment(new FragmentTvShow());
+        adapter.addBotFragment(new FragmentFavourite());
+        viewPager.setAdapter(adapter);
     }
 
     @Override
@@ -72,5 +83,26 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+
+    }
+
+    @Override
+    public void onPageSelected(int i) {
+        if (menuItem != null) {
+            menuItem.setChecked(false);
+        } else {
+            bottomNavigation.getMenu().getItem(0).setChecked(false);
+        }
+        bottomNavigation.getMenu().getItem(i).setChecked(true);
+        menuItem = bottomNavigation.getMenu().getItem(i);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+
     }
 }

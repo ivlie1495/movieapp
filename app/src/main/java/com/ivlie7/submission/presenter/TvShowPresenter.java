@@ -28,7 +28,7 @@ public class TvShowPresenter {
         this.language = language;
     }
 
-    public void getTvShowList() {
+    public void getTvShowList(final List<TvShow> tvShows) {
         ApiConfig apiConfig = new ApiConfig(language);
         Call<TvShowResponse> apiService = apiConfig.getService().getListTv();
 
@@ -48,6 +48,9 @@ public class TvShowPresenter {
             @Override
             public void onFailure(Call<TvShowResponse> call, Throwable t) {
                 tvShowView.hideLoading();
+                if (tvShows != null) {
+                    tvShowView.getTvShowList(tvShows);
+                }
             }
         });
     }

@@ -18,6 +18,7 @@ import com.ivlie7.submission.model.Movie;
 import com.ivlie7.submission.presenter.MoviePresenter;
 import com.ivlie7.submission.view.MovieView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -34,8 +35,10 @@ public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLa
     @BindView(R.id.swipeRefreshMovie)
     SwipeRefreshLayout swipeRefreshMovie;
 
-    MoviePresenter moviePresenter;
-    MovieAdapter movieAdapter;
+    private MoviePresenter moviePresenter;
+    private MovieAdapter movieAdapter;
+
+    private final List<Movie> movies = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,12 +46,29 @@ public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLa
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (movies != null) {
+            outState.putParcelableArrayList(getString(R.string.data), new ArrayList<>(movies));
+        }
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(FragmentMovie.this, view);
 
+        if (savedInstanceState != null) {
+            List<Movie> outStateMovieList =savedInstanceState.getParcelableArrayList(getString(R.string.data));
+            if (outStateMovieList != null) {
+                movieAdapter = new MovieAdapter(outStateMovieList, getContext());
+                recyclerViewMovie.setAdapter(movieAdapter);
+                movies.addAll(outStateMovieList);
+            }
+        }
+
         moviePresenter = new MoviePresenter(this, getString(R.string.set_language));
-        moviePresenter.getMovieList();
+        moviePresenter.getMovieList(movies);
 
         swipeRefreshMovie.setOnRefreshListener(this);
     }
@@ -65,8 +85,11 @@ public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLa
 
     @Override
     public void getMovieList(List<Movie> movieList) {
-        movieAdapter = new MovieAdapter(movieList, getContext());
-        recyclerViewMovie.setAdapter(movieAdapter);
+        if (movieList != null) {
+            movies.addAll(movieList);
+            movieAdapter = new MovieAdapter(movies, getContext());
+            recyclerViewMovie.setAdapter(movieAdapter);
+        }
     }
 
     @Override
@@ -77,7 +100,7 @@ public class FragmentMovie extends Fragment implements MovieView, SwipeRefreshLa
     @Override
     public void onRefresh() {
         swipeRefreshMovie.setRefreshing(false);
-        moviePresenter.getMovieList();
+        moviePresenter.getMovieList(movies);
         progressBarMovie.setVisibility(View.INVISIBLE);
     }
 }
