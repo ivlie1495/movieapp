@@ -24,9 +24,6 @@ import butterknife.ButterKnife;
 
 public class DetailActivity extends AppCompatActivity {
 
-    @BindView(R.id.progressBarDetail)
-    ProgressBar progressBarDetail;
-
     @BindView(R.id.imageViewBackdropDetail)
     ImageView imageViewBackdropDetail;
 
@@ -62,7 +59,6 @@ public class DetailActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        showProgressBar();
         getDataFromIntent();
         getDataDetail();
         favouriteState();
@@ -151,15 +147,5 @@ public class DetailActivity extends AppCompatActivity {
 
     public boolean isMovie() {
         return getIntent().getBooleanExtra("isMovie", true);
-    }
-
-    public void showProgressBar() {
-        progressBarDetail.setVisibility(View.VISIBLE);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progressBarDetail.setVisibility(View.INVISIBLE);
-            }
-        }, 2000);
     }
 }
