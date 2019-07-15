@@ -19,5 +19,6 @@
     <string name="set_language" translatable="false">en-US</string>
     <string name="data_not_found" translatable="false">Data Not Found!</string>
     <string name="favourite" translatable="false">Favourite</string>
+    <string name="search" translatable="false">Search</string>
 
 </resources>

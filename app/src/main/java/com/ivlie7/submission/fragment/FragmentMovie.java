@@ -1,9 +1,13 @@
 package com.ivlie7.submission.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -12,6 +16,7 @@ import com.ivlie7.submission.adapter.MovieAdapter;
 import com.ivlie7.submission.base.BaseFragment;
 import com.ivlie7.submission.model.Movie;
 import com.ivlie7.submission.presenter.MoviePresenter;
+import com.ivlie7.submission.ui.SearchActivity;
 import com.ivlie7.submission.view.MovieView;
 
 import java.util.ArrayList;
@@ -76,5 +81,21 @@ public class FragmentMovie extends BaseFragment implements MovieView, SwipeRefre
         swipeRefresh.setRefreshing(false);
         moviePresenter.getMovieList(movies);
         progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search_button, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_search) {
+            Intent intent = new Intent(getContext(), SearchActivity.class);
+            intent.putExtra("isMovie", true);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

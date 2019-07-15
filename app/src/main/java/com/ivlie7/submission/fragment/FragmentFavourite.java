@@ -1,12 +1,17 @@
 package com.ivlie7.submission.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -36,6 +41,8 @@ public class FragmentFavourite extends Fragment {
 
         tabLayoutFavourite.setupWithViewPager(viewPagerFavourite);
         setupViewPager(viewPagerFavourite);
+
+        setHasOptionsMenu(true);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -43,5 +50,20 @@ public class FragmentFavourite extends Fragment {
         adapter.addTabFragment(new FragmentFavouriteMovie(), getString(R.string.movie));
         adapter.addTabFragment(new FragmentFavouriteTv(), getString(R.string.tv_show));
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.setting, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_change_settings) {
+            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

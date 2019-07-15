@@ -2,14 +2,22 @@ package com.ivlie7.submission.config;
 
 import com.ivlie7.submission.model.MovieResponse;
 import com.ivlie7.submission.model.TvShowResponse;
+import com.ivlie7.submission.util.ApiUtils;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface Api {
-    @GET("discover/movie")
+    @GET("movie/upcoming")
     Call<MovieResponse> getListMovie();
 
     @GET("discover/tv")
     Call<TvShowResponse> getListTv();
+
+    @GET("search_menu/movie")
+    Call<MovieResponse> getListSearchMovie(@Query("query") String query);
+
+    @GET("search_menu/tv")
+    Call<TvShowResponse> getListSearchTv(@Query("query") String query);
 }

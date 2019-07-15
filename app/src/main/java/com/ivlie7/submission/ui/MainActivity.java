@@ -1,13 +1,10 @@
 package com.ivlie7.submission.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ivlie7.submission.R;
@@ -68,21 +65,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         adapter.addBotFragment(new FragmentTvShow());
         adapter.addBotFragment(new FragmentFavourite());
         viewPager.setAdapter(adapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.setting, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_change_settings) {
-            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
