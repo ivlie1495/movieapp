@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.ivlie7.submission.R;
-import com.ivlie7.submission.adapter.ViewPagerFavouriteAdapter;
+import com.ivlie7.submission.adapter.ViewPagerAdapter;
 import com.ivlie7.submission.fragment.FragmentFavourite;
 import com.ivlie7.submission.fragment.FragmentMovie;
 import com.ivlie7.submission.fragment.FragmentTvShow;
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerFavouriteAdapter adapter = new ViewPagerFavouriteAdapter(getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addBotFragment(new FragmentMovie());
         adapter.addBotFragment(new FragmentTvShow());
         adapter.addBotFragment(new FragmentFavourite());

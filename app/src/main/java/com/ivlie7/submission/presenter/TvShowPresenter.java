@@ -8,6 +8,7 @@ import com.ivlie7.submission.model.TvShow;
 import com.ivlie7.submission.model.TvShowResponse;
 import com.ivlie7.submission.view.TvShowView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -64,5 +65,45 @@ public class TvShowPresenter {
         } else {
             tvShowView.dataNotFound();
         }
+    }
+
+    public void searchTvShow(final String query, final List<TvShow> oriListTvShow) {
+        ApiConfig apiConfig = new ApiConfig(language);
+        Call<TvShowResponse> apiService = apiConfig.getService().getListSearchTv(query);
+
+        tvShowView.showLoading();
+        apiService.enqueue(new Callback<TvShowResponse>() {
+            @Override
+            public void onResponse(Call<TvShowResponse> call, Response<TvShowResponse> response) {
+                if (response.body() != null) {
+                    List<TvShow> tvShowList = response.body().getTvShowList();
+                    tvShowView.getTvShowList(tvShowList);
+                    tvShowView.hideLoading();
+                } else {
+                    tvShowView.dataNotFound();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TvShowResponse> call, Throwable t) {
+                tvShowView.hideLoading();
+                if (oriListTvShow != null) {
+                    tvShowView.getTvShowList(filterList(query, oriListTvShow));
+                }
+            }
+        });
+    }
+
+    private List<TvShow> filterList(String query, List<TvShow> tvShowList) {
+        List<TvShow> filteredListMovie = new ArrayList<>();
+
+        if (!query.isEmpty()) {
+            for (TvShow tvShow : tvShowList) {
+                if (tvShow.getName().toLowerCase().contains(query)) {
+                    filteredListMovie.add(tvShow);
+                }
+            }
+        }
+        return filteredListMovie;
     }
 }

@@ -8,6 +8,7 @@ import com.ivlie7.submission.model.Movie;
 import com.ivlie7.submission.model.MovieResponse;
 import com.ivlie7.submission.view.MovieView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -64,5 +65,45 @@ public class MoviePresenter {
         } else {
             movieView.dataNotFound();
         }
+    }
+
+    public void searchMovie(final String query, final List<Movie> oriListMovie) {
+        ApiConfig apiConfig = new ApiConfig(language);
+        Call<MovieResponse> apiService = apiConfig.getService().getListSearchMovie(query);
+
+        movieView.showLoading();
+        apiService.enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+                if (response.body() != null) {
+                    List<Movie> movieList = response.body().getGetMovieList();
+                    movieView.getMovieList(movieList);
+                    movieView.hideLoading();
+                } else {
+                    movieView.dataNotFound();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+                movieView.hideLoading();
+                if (oriListMovie != null) {
+                    movieView.getMovieList(filterList(query, oriListMovie));
+                }
+            }
+        });
+    }
+
+    private List<Movie> filterList(String query, List<Movie> movieList) {
+        List<Movie> filteredListMovie = new ArrayList<>();
+
+        if (!query.isEmpty()) {
+            for (Movie movie : movieList) {
+                if (movie.getTitle().toLowerCase().contains(query)) {
+                    filteredListMovie.add(movie);
+                }
+            }
+        }
+        return filteredListMovie;
     }
 }

@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ivlie7.submission.R;
-import com.ivlie7.submission.adapter.ViewPagerFavouriteAdapter;
+import com.ivlie7.submission.adapter.ViewPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +46,7 @@ public class FragmentFavourite extends Fragment {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerFavouriteAdapter adapter = new ViewPagerFavouriteAdapter(getChildFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addTabFragment(new FragmentFavouriteMovie(), getString(R.string.movie));
         adapter.addTabFragment(new FragmentFavouriteTv(), getString(R.string.tv_show));
         viewPager.setAdapter(adapter);
@@ -55,7 +55,7 @@ public class FragmentFavourite extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.setting, menu);
+        inflater.inflate(R.menu.setting_menu, menu);
     }
 
     @Override

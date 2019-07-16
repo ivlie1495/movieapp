@@ -15,9 +15,9 @@ public interface Api {
     @GET("discover/tv")
     Call<TvShowResponse> getListTv();
 
-    @GET("search_menu/movie")
+    @GET("search/movie")
     Call<MovieResponse> getListSearchMovie(@Query("query") String query);
 
-    @GET("search_menu/tv")
+    @GET("search/tv")
     Call<TvShowResponse> getListSearchTv(@Query("query") String query);
 }

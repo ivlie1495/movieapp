@@ -1,14 +1,13 @@
 package com.ivlie7.submission.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.ivlie7.submission.R;
@@ -16,7 +15,6 @@ import com.ivlie7.submission.adapter.TvShowAdapter;
 import com.ivlie7.submission.base.BaseFragment;
 import com.ivlie7.submission.model.TvShow;
 import com.ivlie7.submission.presenter.TvShowPresenter;
-import com.ivlie7.submission.ui.SearchActivity;
 import com.ivlie7.submission.view.TvShowView;
 
 import java.util.ArrayList;
@@ -24,13 +22,13 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-public class FragmentTvShow extends BaseFragment implements TvShowView, SwipeRefreshLayout.OnRefreshListener {
+public class FragmentTvShow extends BaseFragment<TvShow> implements TvShowView, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (tvShows != null) {
-            outState.putParcelableArrayList(getString(R.string.data), new ArrayList<>(tvShows));
+        if (originalList != null) {
+            outState.putParcelableArrayList(getString(R.string.data), new ArrayList<>(originalList));
         }
     }
 
@@ -44,12 +42,12 @@ public class FragmentTvShow extends BaseFragment implements TvShowView, SwipeRef
             if (outStateTvShowList != null) {
                 tvShowAdapter = new TvShowAdapter(outStateTvShowList, getContext());
                 recyclerView.setAdapter(tvShowAdapter);
-                tvShows = outStateTvShowList;
+                list = outStateTvShowList;
             }
         }
 
         tvShowPresenter = new TvShowPresenter(this, getString(R.string.set_language));
-        tvShowPresenter.getTvShowList(tvShows);
+        tvShowPresenter.getTvShowList(list);
 
         swipeRefresh.setOnRefreshListener(this);
     }
@@ -68,8 +66,9 @@ public class FragmentTvShow extends BaseFragment implements TvShowView, SwipeRef
     @Override
     public void getTvShowList(List<TvShow> tvShowList) {
         if (tvShowList != null) {
-            tvShows = tvShowList;
-            tvShowAdapter = new TvShowAdapter(tvShows, getContext());
+            list = tvShowList;
+            setOriginalList(list);
+            tvShowAdapter = new TvShowAdapter(list, getContext());
             recyclerView.setAdapter(tvShowAdapter);
         }
     }
@@ -82,23 +81,33 @@ public class FragmentTvShow extends BaseFragment implements TvShowView, SwipeRef
     @Override
     public void onRefresh() {
         swipeRefresh.setRefreshing(false);
-        tvShowPresenter.getTvShowList(tvShows);
+        tvShowPresenter.getTvShowList(list);
         progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.search_button, menu);
+        inflater.inflate(R.menu.action_menu, menu);
+
+        menuItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        searchView.setQueryHint(getString(R.string.search));
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_search) {
-            Intent intent = new Intent(getContext(), SearchActivity.class);
-            intent.putExtra("isMovie", false);
-            startActivity(intent);
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if (!newText.isEmpty()) {
+            tvShowPresenter.searchTvShow(newText, originalList);
+        } else {
+            tvShowPresenter.getTvShowList(originalList);
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }

@@ -1,15 +1,19 @@
 package com.ivlie7.submission.base;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.adapter.MovieAdapter;
@@ -25,7 +29,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BaseFragment extends Fragment {
+public class BaseFragment<T> extends Fragment {
 
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
@@ -42,8 +46,11 @@ public class BaseFragment extends Fragment {
     public MoviePresenter moviePresenter;
     public MovieAdapter movieAdapter;
 
-    public List<Movie> movies = new ArrayList<>();
-    public List<TvShow> tvShows = new ArrayList<>();
+    public List<T> originalList = new ArrayList<>();
+    public List<T> list = new ArrayList<>();
+
+    public MenuItem menuItem;
+    public SearchView searchView;
 
     @Nullable
     @Override
@@ -52,5 +59,20 @@ public class BaseFragment extends Fragment {
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
         return view;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_change_settings) {
+            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void setOriginalList(List<T> list) {
+        if (originalList.isEmpty() && !list.isEmpty()) {
+            originalList = list;
+        }
     }
 }
