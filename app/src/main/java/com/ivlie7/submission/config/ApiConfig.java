@@ -1,6 +1,6 @@
 package com.ivlie7.submission.config;
 
-import com.ivlie7.submission.util.ApiUtils;
+import com.ivlie7.submission.constant.ApiConstants;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -29,7 +29,7 @@ public class ApiConfig {
 
     private static Retrofit getRetrofit() {
         return new Retrofit.Builder()
-                .baseUrl(ApiUtils.BASE_URL)
+                .baseUrl(ApiConstants.BASE_URL)
                 .client(getInterceptor())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

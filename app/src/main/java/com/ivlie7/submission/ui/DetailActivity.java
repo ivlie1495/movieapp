@@ -1,6 +1,8 @@
 package com.ivlie7.submission.ui;
 
 import android.R.id;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -10,11 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.ivlie7.submission.service.widget.FavouriteWidget;
 import com.ivlie7.submission.R;
+import com.ivlie7.submission.service.widget.StackWidgetService;
 import com.ivlie7.submission.config.RoomConfig;
 import com.ivlie7.submission.model.Movie;
 import com.ivlie7.submission.model.TvShow;
-import com.ivlie7.submission.util.ApiUtils;
+import com.ivlie7.submission.constant.ApiConstants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,10 +72,10 @@ public class DetailActivity extends AppCompatActivity {
             textViewRatingDetail.setText(String.valueOf(isMovie() ? movie.getVoteAverage() : tvShow.getVoteAverage()));
             textViewOverviewDetail.setText(isMovie() ? movie.getOverview() : tvShow.getOverview());
             Glide.with(this)
-                    .load(ApiUtils.API_BACKDROP + (isMovie() ? movie.getBackdropPath() : tvShow.getBackdropPath()))
+                    .load(ApiConstants.API_BACKDROP + (isMovie() ? movie.getBackdropPath() : tvShow.getBackdropPath()))
                     .into(imageViewBackdropDetail);
             Glide.with(this)
-                    .load(ApiUtils.API_POSTER + (isMovie() ? movie.getPosterPath() : tvShow.getPosterPath()))
+                    .load(ApiConstants.API_POSTER + (isMovie() ? movie.getPosterPath() : tvShow.getPosterPath()))
                     .into(imageViewPosterDetail);
         }
     }
@@ -117,6 +121,24 @@ public class DetailActivity extends AppCompatActivity {
         } else {
             if (isMovie()) {
                 RoomConfig.getInstance(this).movieDao().addToFavourite(movie);
+//                ContentValues contentValues = new ContentValues();
+//                contentValues.put("id", movie.getId());
+//                contentValues.put("name", movie.getTitle());
+//                contentValues.put("poster_path", movie.getPosterPath());
+//                contentValues.put("backdrop_path", movie.getBackdropPath());
+//                contentValues.put("overview", movie.getOverview());
+//                contentValues.put("release_date", movie.getReleaseDate());
+//                contentValues.put("vote_average", movie.getVoteAverage());
+//
+//                DatabaseProvider databaseProvider = new DatabaseProvider();
+//                databaseProvider.insert(URI_MOVIE, contentValues);
+
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
+                FavouriteWidget favouriteWidget = new FavouriteWidget();
+//                ComponentName componentName = new ComponentName(getApplicationContext(), StackWidgetService.class);
+                int[] widgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, StackWidgetService.class));
+
+                favouriteWidget.onUpdate(getApplicationContext(), appWidgetManager, widgetIds);
             } else {
                 RoomConfig.getInstance(this).tvShowDao().addToFavourite(tvShow);
             }

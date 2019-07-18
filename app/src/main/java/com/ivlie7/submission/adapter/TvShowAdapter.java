@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.base.BaseViewHolder;
 import com.ivlie7.submission.model.TvShow;
-import com.ivlie7.submission.util.ApiUtils;
+import com.ivlie7.submission.constant.ApiConstants;
 import com.ivlie7.submission.ui.DetailActivity;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         baseViewHolder.textViewTitle.setText(tvShow.getName());
         baseViewHolder.textViewRating.setText(String.valueOf(tvShow.getVoteAverage()));
         baseViewHolder.textViewRelease.setText(tvShow.getFirstAirDate());
-        Glide.with(context).load(ApiUtils.API_POSTER + tvShow.getPosterPath()).into(baseViewHolder.imageViewPoster);
+        Glide.with(context).load(ApiConstants.API_POSTER + tvShow.getPosterPath()).into(baseViewHolder.imageViewPoster);
 
         baseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

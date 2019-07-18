@@ -37,14 +37,7 @@ public class FragmentTvShow extends BaseFragment<TvShow> implements TvShowView, 
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        if (savedInstanceState != null) {
-            List<TvShow> outStateTvShowList =savedInstanceState.getParcelableArrayList(getString(R.string.data));
-            if (outStateTvShowList != null) {
-                tvShowAdapter = new TvShowAdapter(outStateTvShowList, getContext());
-                recyclerView.setAdapter(tvShowAdapter);
-                list = outStateTvShowList;
-            }
-        }
+        setSavedInstanceState(savedInstanceState);
 
         tvShowPresenter = new TvShowPresenter(this, getString(R.string.set_language));
         tvShowPresenter.getTvShowList(list);
@@ -109,5 +102,16 @@ public class FragmentTvShow extends BaseFragment<TvShow> implements TvShowView, 
             tvShowPresenter.getTvShowList(originalList);
         }
         return true;
+    }
+
+    public void setSavedInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            List<TvShow> outStateTvShowList =savedInstanceState.getParcelableArrayList(getString(R.string.data));
+            if (outStateTvShowList != null) {
+                tvShowAdapter = new TvShowAdapter(outStateTvShowList, getContext());
+                recyclerView.setAdapter(tvShowAdapter);
+                list = outStateTvShowList;
+            }
+        }
     }
 }

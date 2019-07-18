@@ -3,6 +3,8 @@ package com.ivlie7.submission.model;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.content.ContentValues;
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -64,6 +66,29 @@ public class Movie implements Parcelable {
             return new Movie[size];
         }
     };
+
+    public static Movie fromContentValues(ContentValues values) {
+        Movie movie = new Movie();
+        movie.setId(values.getAsInteger("id"));
+        movie.setTitle(values.getAsString("name"));
+        movie.setPosterPath(values.getAsString("poster_path"));
+        movie.setBackdropPath(values.getAsString("backdrop_path"));
+        movie.setOverview(values.getAsString("overview"));
+        movie.setReleaseDate(values.getAsString("release_date"));
+        movie.setVoteAverage(values.getAsFloat("vote_average"));
+
+        return movie;
+    }
+
+    public Movie(Cursor cursor) {
+        this.id = cursor.getInt(cursor.getColumnIndex("id"));
+        this.title = cursor.getString(cursor.getColumnIndex("name"));
+        this.posterPath = cursor.getString(cursor.getColumnIndex("poster_path"));
+        this.backdropPath = cursor.getString(cursor.getColumnIndex("backdrop_path"));
+        this.overview = cursor.getString(cursor.getColumnIndex("overview"));
+        this.releaseDate = cursor.getString(cursor.getColumnIndex("release_date"));
+        this.voteAverage = cursor.getFloat(cursor.getColumnIndex("vote_average"));
+    }
 
     @Override
     public int describeContents() {

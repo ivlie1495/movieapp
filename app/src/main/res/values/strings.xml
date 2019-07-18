@@ -20,5 +20,24 @@
     <string name="data_not_found" translatable="false">Data Not Found!</string>
     <string name="favourite" translatable="false">Favourite</string>
     <string name="search" translatable="false">Search</string>
+    <string name="no_favourite" translatable="false">No Favourite</string>
+    <string name="setting" translatable="false">Setting</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="banner">Banner</string>
+
+    <string name="action_setting" translatable="false">Settings</string>
+    <string name="action_notification" translatable="false">Notifications</string>
+    <string name="daily_reminder_key" tools:ignore="MissingTranslation">daily_reminder_key</string>
+    <string name="switch_daily_reminder" translatable="false">Turn on/off Daily Reminder</string>
+    <string name="daily_reminder" translatable="false">Daily Reminder</string>
+    <string name="upcoming_reminder_key" tools:ignore="MissingTranslation">upcoming_reminder_key</string>
+    <string name="switch_upcoming_reminder" translatable="false">Turn on/off Upcoming Reminder</string>
+    <string name="upcoming_reminder" translatable="false">Upcoming Reminder</string>
+    <string name="setting_locale_key" tools:ignore="MissingTranslation">setting_locale_key</string>
+    <string name="setting_locale" translatable="false">Setting Locale</string>
+    <string name="localization_setting" translatable="false">Change Your Phone Localization</string>
+    <string name="daily_reminder_message" translatable="false">Hi, come and see what is the new movie today!</string>
+    <string name="upcoming_reminder_message" translatable="false">Hi, %s is release today!</string>
 
 </resources>

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.adapter.ViewPagerAdapter;
+import com.ivlie7.submission.ui.SettingActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,12 +59,12 @@ public class FragmentFavourite extends Fragment {
         inflater.inflate(R.menu.setting_menu, menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_change_settings) {
-            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.id.action_change_settings) {
+//            Intent intent = new Intent(getContext(), SettingActivity.class);
+//            startActivity(intent);
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

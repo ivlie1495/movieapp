@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.SettingActivity" />
         <activity android:name=".ui.DetailActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
@@ -21,6 +22,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".service.widget.FavouriteWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favourite_widget_info" />
+        </receiver>
+
+        <receiver
+            android:name=".service.reminder.DailyReminder"
+            android:enabled="true"
+            android:exported="false" />
+
+        <receiver
+            android:name=".service.reminder.UpcomingReminder"
+            android:enabled="true"
+            android:exported="false"/>
+
+        <provider
+            android:name=".config.DatabaseProvider"
+            android:authorities="com.ivlie7.submission"
+            android:exported="true"
+            android:readPermission="com.ivlie7.submission.READ_DATABASE"
+            android:writePermission="com.ivlie7.submission.WRITE_DATABASE" />
+
+        <service
+            android:name=".service.widget.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

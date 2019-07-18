@@ -1,6 +1,6 @@
 package com.ivlie7.submission.config;
 
-import com.ivlie7.submission.util.ApiUtils;
+import com.ivlie7.submission.constant.ApiConstants;
 
 import java.io.IOException;
 
@@ -22,7 +22,7 @@ public class ApiKeyInterceptor implements Interceptor {
         HttpUrl httpUrl = chain.request()
                 .url()
                 .newBuilder()
-                .addQueryParameter("api_key", ApiUtils.API_KEY)
+                .addQueryParameter("api_key", ApiConstants.API_KEY)
                 .addQueryParameter("language", language)
                 .build();
 

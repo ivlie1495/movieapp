@@ -11,4 +11,16 @@
     <string name="data_not_found" translatable="false">Data Kosong!</string>
     <string name="favourite" translatable="false">Favorit</string>
     <string name="search" translatable="false">Cari</string>
+    <string name="no_favourite" translatable="false">Tidak Ada Favorit</string>
+
+    <string name="action_setting" translatable="false">Pengaturan</string>
+    <string name="action_notification" translatable="false">notifikasi</string>
+    <string name="switch_daily_reminder" translatable="false">Nyalakan/Matikan Pengingat Harian</string>
+    <string name="daily_reminder" translatable="false">Pengingat Harian</string>
+    <string name="upcoming_reminder" translatable="false">Pengingat Film Terbaru</string>
+    <string name="switch_upcoming_reminder" translatable="false">Nyalakan/Matikan Pengingat Film Terbaru</string>
+    <string name="setting_locale" translatable="false">Pengaturan Bahasa</string>
+    <string name="localization_setting" translatable="false">Ubah Bahasa Ponsel Anda</string>
+    <string name="daily_reminder_message" translatable="false">Halo, ayo lihat ada film terbaru apa hari ini!</string>
+    <string name="upcoming_reminder_message" translatable="false">Halo, %s rilis hari ini!</string>
 </resources>

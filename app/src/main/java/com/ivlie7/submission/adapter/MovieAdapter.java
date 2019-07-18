@@ -13,7 +13,7 @@ import com.ivlie7.submission.R;
 import com.ivlie7.submission.base.BaseViewHolder;
 import com.ivlie7.submission.model.Movie;
 import com.ivlie7.submission.ui.DetailActivity;
-import com.ivlie7.submission.util.ApiUtils;
+import com.ivlie7.submission.constant.ApiConstants;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         baseViewHolder.textViewTitle.setText(movie.getTitle());
         baseViewHolder.textViewRating.setText(String.valueOf(movie.getVoteAverage()));
         baseViewHolder.textViewRelease.setText(movie.getReleaseDate());
-        Glide.with(context).load(ApiUtils.API_POSTER + movie.getPosterPath()).into(baseViewHolder.imageViewPoster);
+        Glide.with(context).load(ApiConstants.API_POSTER + movie.getPosterPath()).into(baseViewHolder.imageViewPoster);
 
         baseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

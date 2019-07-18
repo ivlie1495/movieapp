@@ -2,7 +2,6 @@ package com.ivlie7.submission.config;
 
 import com.ivlie7.submission.model.MovieResponse;
 import com.ivlie7.submission.model.TvShowResponse;
-import com.ivlie7.submission.util.ApiUtils;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

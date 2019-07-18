@@ -2,7 +2,6 @@ package com.ivlie7.submission.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,10 +17,9 @@ import android.widget.SearchView;
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.adapter.MovieAdapter;
 import com.ivlie7.submission.adapter.TvShowAdapter;
-import com.ivlie7.submission.model.Movie;
-import com.ivlie7.submission.model.TvShow;
 import com.ivlie7.submission.presenter.MoviePresenter;
 import com.ivlie7.submission.presenter.TvShowPresenter;
+import com.ivlie7.submission.ui.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +62,7 @@ public class BaseFragment<T> extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_change_settings) {
-            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            Intent intent = new Intent(getContext(), SettingActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

@@ -1,6 +1,6 @@
-package com.ivlie7.submission.util;
+package com.ivlie7.submission.constant;
 
-public class ApiUtils {
+public class ApiConstants {
     public static final String BASE_URL = "https://api.themoviedb.org/3/";
     public static final String API_KEY = "9acb3107922c9364f09caa4dc3bb8379";
     public static final String API_POSTER = "https://image.tmdb.org/t/p/w185/";

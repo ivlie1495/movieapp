@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/action_notification">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/daily_reminder_key"
+            android:summary="@string/switch_daily_reminder"
+            android:title="@string/daily_reminder" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/upcoming_reminder_key"
+            android:summary="@string/switch_upcoming_reminder"
+            android:title="@string/upcoming_reminder" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/action_setting">
+
+        <Preference
+            android:key="@string/setting_locale_key"
+            android:summary="@string/localization_setting"
+            android:title="@string/setting_locale" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -34,14 +34,7 @@ public class FragmentMovie extends BaseFragment<Movie> implements MovieView, Swi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (savedInstanceState != null) {
-            List<Movie> outStateMovieList =savedInstanceState.getParcelableArrayList(getString(R.string.data));
-            if (outStateMovieList != null) {
-                movieAdapter = new MovieAdapter(outStateMovieList, getContext());
-                recyclerView.setAdapter(movieAdapter);
-                list = outStateMovieList;
-            }
-        }
+        setSavedInstanceState(savedInstanceState);
 
         moviePresenter = new MoviePresenter(this, getString(R.string.set_language));
         moviePresenter.getMovieList(list);
@@ -106,5 +99,16 @@ public class FragmentMovie extends BaseFragment<Movie> implements MovieView, Swi
             moviePresenter.getMovieList(originalList);
         }
         return true;
+    }
+
+    public void setSavedInstanceState(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            List<Movie> outStateMovieList = savedInstanceState.getParcelableArrayList(getString(R.string.data));
+            if (outStateMovieList != null) {
+                movieAdapter = new MovieAdapter(outStateMovieList, getContext());
+                recyclerView.setAdapter(movieAdapter);
+                list = outStateMovieList;
+            }
+        }
     }
 }
