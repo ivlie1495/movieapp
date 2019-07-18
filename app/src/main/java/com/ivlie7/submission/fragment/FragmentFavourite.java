@@ -1,8 +1,6 @@
 package com.ivlie7.submission.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -11,13 +9,11 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.adapter.ViewPagerAdapter;
-import com.ivlie7.submission.ui.SettingActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,13 +54,4 @@ public class FragmentFavourite extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.setting_menu, menu);
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.action_change_settings) {
-//            Intent intent = new Intent(getContext(), SettingActivity.class);
-//            startActivity(intent);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

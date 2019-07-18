@@ -17,7 +17,6 @@ import com.ivlie7.submission.model.Movie;
 import com.ivlie7.submission.presenter.MoviePresenter;
 import com.ivlie7.submission.view.MovieView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentMovie extends BaseFragment<Movie> implements MovieView, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {

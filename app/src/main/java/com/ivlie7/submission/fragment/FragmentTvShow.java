@@ -17,7 +17,6 @@ import com.ivlie7.submission.model.TvShow;
 import com.ivlie7.submission.presenter.TvShowPresenter;
 import com.ivlie7.submission.view.TvShowView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;

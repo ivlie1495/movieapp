@@ -12,6 +12,7 @@ import com.google.gson.annotations.SerializedName;
 public class TvShow implements Parcelable {
 
     public TvShow() {
+
     }
 
     @PrimaryKey

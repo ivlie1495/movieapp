@@ -14,6 +14,7 @@ import com.google.gson.annotations.SerializedName;
 public class Movie implements Parcelable {
 
     public Movie() {
+
     }
 
     @PrimaryKey
