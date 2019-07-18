@@ -2,12 +2,14 @@ package com.ivlie7.submission.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +29,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BaseFragment<T> extends Fragment {
+public class BaseFragment<T extends Parcelable> extends Fragment {
 
     @BindView(R.id.progressBar)
     public ProgressBar progressBar;
@@ -49,6 +51,14 @@ public class BaseFragment<T> extends Fragment {
 
     public MenuItem menuItem;
     public SearchView searchView;
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (originalList != null) {
+            outState.putParcelableArrayList(getString(R.string.data), new ArrayList<>(originalList));
+        }
+    }
 
     @Nullable
     @Override

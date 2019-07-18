@@ -23,14 +23,6 @@ import java.util.List;
 public class FragmentMovie extends BaseFragment<Movie> implements MovieView, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (originalList != null) {
-            outState.putParcelableArrayList(getString(R.string.data), new ArrayList<>(originalList));
-        }
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -79,11 +71,7 @@ public class FragmentMovie extends BaseFragment<Movie> implements MovieView, Swi
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.action_menu, menu);
-
-        menuItem = menu.findItem(R.id.action_search);
-        searchView = (SearchView) menuItem.getActionView();
-        searchView.setOnQueryTextListener(this);
-        searchView.setQueryHint(getString(R.string.search));
+        setSearchView(menu);
     }
 
     @Override
@@ -110,5 +98,12 @@ public class FragmentMovie extends BaseFragment<Movie> implements MovieView, Swi
                 list = outStateMovieList;
             }
         }
+    }
+
+    public void setSearchView(Menu menu) {
+        menuItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        searchView.setQueryHint(getString(R.string.search));
     }
 }

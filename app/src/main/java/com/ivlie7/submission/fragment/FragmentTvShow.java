@@ -25,14 +25,6 @@ import butterknife.ButterKnife;
 public class FragmentTvShow extends BaseFragment<TvShow> implements TvShowView, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (originalList != null) {
-            outState.putParcelableArrayList(getString(R.string.data), new ArrayList<>(originalList));
-        }
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
@@ -82,11 +74,7 @@ public class FragmentTvShow extends BaseFragment<TvShow> implements TvShowView, 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.action_menu, menu);
-
-        menuItem = menu.findItem(R.id.action_search);
-        searchView = (SearchView) menuItem.getActionView();
-        searchView.setOnQueryTextListener(this);
-        searchView.setQueryHint(getString(R.string.search));
+        setSearchView(menu);
     }
 
     @Override
@@ -113,5 +101,12 @@ public class FragmentTvShow extends BaseFragment<TvShow> implements TvShowView, 
                 list = outStateTvShowList;
             }
         }
+    }
+
+    public void setSearchView(Menu menu) {
+        menuItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+        searchView.setQueryHint(getString(R.string.search));
     }
 }
