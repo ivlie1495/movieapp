@@ -22,8 +22,8 @@ import java.util.List;
 
 public class UpcomingReminder extends BroadcastReceiver {
 
-    public static final int NOTIFICATION_ID = 1;
-    public static final String NOTIFICATION_CHANNEL_ID = "1";
+    private static final int NOTIFICATION_ID = 1;
+    private static final String NOTIFICATION_CHANNEL_ID = "1";
 
     public UpcomingReminder() {
 
@@ -36,7 +36,7 @@ public class UpcomingReminder extends BroadcastReceiver {
         showReminderNotification(context, title, notificationId);
     }
 
-    public void showReminderNotification(Context context, String title, int notificationId) {
+    private void showReminderNotification(Context context, String title, int notificationId) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Intent intent = new Intent(context, MainActivity.class);

@@ -39,17 +39,17 @@ public class BaseFragment<T extends Parcelable> extends Fragment {
     @BindView(R.id.swipeRefresh)
     public SwipeRefreshLayout swipeRefresh;
 
-    public TvShowPresenter tvShowPresenter;
-    public TvShowAdapter tvShowAdapter;
+    protected TvShowPresenter tvShowPresenter;
+    protected TvShowAdapter tvShowAdapter;
 
-    public MoviePresenter moviePresenter;
-    public MovieAdapter movieAdapter;
+    protected MoviePresenter moviePresenter;
+    protected MovieAdapter movieAdapter;
 
-    public List<T> originalList = new ArrayList<>();
-    public List<T> list = new ArrayList<>();
+    protected List<T> originalList = new ArrayList<>();
+    protected List<T> list = new ArrayList<>();
 
-    public MenuItem menuItem;
-    public SearchView searchView;
+    protected MenuItem menuItem;
+    protected SearchView searchView;
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -77,7 +77,7 @@ public class BaseFragment<T extends Parcelable> extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setOriginalList(List<T> list) {
+    protected void setOriginalList(List<T> list) {
         if (originalList.isEmpty() && !list.isEmpty()) {
             originalList = list;
         }

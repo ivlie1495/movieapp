@@ -11,7 +11,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ApiKeyInterceptor implements Interceptor {
+class ApiKeyInterceptor implements Interceptor {
 
     private String language;
 

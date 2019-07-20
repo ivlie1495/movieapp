@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 
 import static com.ivlie7.submission.config.DatabaseProvider.URI_MOVIE;
 
-public class StackRemoveViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+class StackRemoveViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private Context context;
     private Cursor cursor;

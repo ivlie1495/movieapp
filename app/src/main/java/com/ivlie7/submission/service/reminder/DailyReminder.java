@@ -20,9 +20,9 @@ import java.util.Calendar;
 
 public class DailyReminder extends BroadcastReceiver {
 
-    public static final int NOTIFICATION_ID = 1;
-    public static final String NOTIFICATION_CHANNEL_ID = "1";
-    public static CharSequence NOTIFICATION_CHANNEL_NAME = "Movie Channel";
+    private static final int NOTIFICATION_ID = 1;
+    private static final String NOTIFICATION_CHANNEL_ID = "1";
+    private static CharSequence NOTIFICATION_CHANNEL_NAME = "Movie Channel";
 
     public DailyReminder() {
 
@@ -32,14 +32,14 @@ public class DailyReminder extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String title = context.getString(R.string.app_name);
         String message = context.getString(R.string.daily_reminder_message);
-        showReminderNotification(context, title, message, NOTIFICATION_ID);
+        showReminderNotification(context, title, message);
     }
 
-    public void showReminderNotification(Context context, String title, String message, int notificationId) {
+    private void showReminderNotification(Context context, String title, String message) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, notificationId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, DailyReminder.NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Uri notificationRingtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
@@ -60,7 +60,7 @@ public class DailyReminder extends BroadcastReceiver {
             notificationManager.createNotificationChannel(notificationChannel);
         }
 
-        notificationManager.notify(notificationId, builder.build());
+        notificationManager.notify(DailyReminder.NOTIFICATION_ID, builder.build());
     }
 
     public void setRepeatReminder(Context context) {

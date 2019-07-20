@@ -65,7 +65,7 @@ public class DetailActivity extends AppCompatActivity {
         favouriteState();
     }
 
-    public void getDataDetail() {
+    private void getDataDetail() {
         if (movie != null || tvShow != null) {
             textViewTitleDetail.setText(isMovie() ? movie.getTitle() : tvShow.getName());
             textViewReleaseDetail.setText(isMovie() ? movie.getReleaseDate() : tvShow.getFirstAirDate());
@@ -102,7 +102,7 @@ public class DetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void getDataFromIntent() {
+    private void getDataFromIntent() {
         if (isMovie()) {
             movie = getIntent().getParcelableExtra(getString(R.string.data));
         } else {
@@ -110,7 +110,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void addOrRemoveToFavourite() {
+    private void addOrRemoveToFavourite() {
         if (isFavourite) {
             if (isMovie()) {
                 RoomConfig.getInstance(this).movieDao().deleteFromFavourite(movie);
@@ -148,7 +148,7 @@ public class DetailActivity extends AppCompatActivity {
         isFavourite = !isFavourite;
     }
 
-    public void setFavourite() {
+    private void setFavourite() {
         if (isFavourite) {
             menuItem.getItem(0).setIcon(R.drawable.icon_added_to_favourite);
         } else {
@@ -156,7 +156,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public void favouriteState() {
+    private void favouriteState() {
         if (isMovie()) {
             isFavourite = RoomConfig.getInstance(this).movieDao().findMovieById(movie.getId()) != null;
         } else {
@@ -164,7 +164,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    public boolean isMovie() {
+    private boolean isMovie() {
         return getIntent().getBooleanExtra("isMovie", true);
     }
 }

@@ -9,9 +9,4 @@ public class StackWidgetService extends RemoteViewsService {
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new StackRemoveViewsFactory(this.getApplicationContext());
     }
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
 }

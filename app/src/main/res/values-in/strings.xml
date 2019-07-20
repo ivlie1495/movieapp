@@ -6,7 +6,6 @@
     <string name="release" translatable="false">Tanggal Rilis</string>
     <string name="score" translatable="false">Nilai</string>
     <string name="overview" translatable="false">Sinopsis</string>
-    <string name="language" translatable="false">Bahasa</string>
     <string name="set_language" translatable="false">in-ID</string>
     <string name="data_not_found" translatable="false">Data Kosong!</string>
     <string name="favourite" translatable="false">Favorit</string>

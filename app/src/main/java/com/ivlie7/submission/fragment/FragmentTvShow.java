@@ -91,7 +91,7 @@ public class FragmentTvShow extends BaseFragment<TvShow> implements TvShowView, 
         return true;
     }
 
-    public void setSavedInstanceState(Bundle savedInstanceState) {
+    private void setSavedInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             List<TvShow> outStateTvShowList =savedInstanceState.getParcelableArrayList(getString(R.string.data));
             if (outStateTvShowList != null) {
@@ -102,7 +102,7 @@ public class FragmentTvShow extends BaseFragment<TvShow> implements TvShowView, 
         }
     }
 
-    public void setSearchView(Menu menu) {
+    private void setSearchView(Menu menu) {
         menuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) menuItem.getActionView();
         searchView.setOnQueryTextListener(this);

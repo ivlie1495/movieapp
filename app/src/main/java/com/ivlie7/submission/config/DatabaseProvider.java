@@ -14,7 +14,7 @@ import com.ivlie7.submission.model.Movie;
 
 public class DatabaseProvider extends ContentProvider {
 
-    public static final String AUTHORITY = "com.ivlie7.submission";
+    private static final String AUTHORITY = "com.ivlie7.submission";
     public static final Uri URI_MOVIE = Uri.parse("content://" + AUTHORITY + "/Movie");
 
     private static final int CODE_MOVIE_DIR = 1;

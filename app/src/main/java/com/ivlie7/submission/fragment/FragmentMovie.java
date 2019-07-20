@@ -88,7 +88,7 @@ public class FragmentMovie extends BaseFragment<Movie> implements MovieView, Swi
         return true;
     }
 
-    public void setSavedInstanceState(Bundle savedInstanceState) {
+    private void setSavedInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             List<Movie> outStateMovieList = savedInstanceState.getParcelableArrayList(getString(R.string.data));
             if (outStateMovieList != null) {
@@ -99,7 +99,7 @@ public class FragmentMovie extends BaseFragment<Movie> implements MovieView, Swi
         }
     }
 
-    public void setSearchView(Menu menu) {
+    private void setSearchView(Menu menu) {
         menuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) menuItem.getActionView();
         searchView.setOnQueryTextListener(this);

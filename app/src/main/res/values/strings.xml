@@ -1,6 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" tools:ignore="MissingTranslation">Movie App</string>
-    <string name="score_bar" tools:ignore="MissingTranslation">0</string>
     <string name="data" tools:ignore="MissingTranslation">data</string>
     <string name="genre" tools:ignore="MissingTranslation">genre</string>
     <string name="poster" tools:ignore="MissingTranslation">Poster</string>
@@ -15,7 +14,6 @@
     <string name="release" translatable="false">Release</string>
     <string name="score" translatable="false">Score</string>
     <string name="overview" translatable="false">Overview</string>
-    <string name="language" translatable="false">Language</string>
     <string name="set_language" translatable="false">en-US</string>
     <string name="data_not_found" translatable="false">Data Not Found!</string>
     <string name="favourite" translatable="false">Favourite</string>
