@@ -121,24 +121,6 @@ public class DetailActivity extends AppCompatActivity {
         } else {
             if (isMovie()) {
                 RoomConfig.getInstance(this).movieDao().addToFavourite(movie);
-//                ContentValues contentValues = new ContentValues();
-//                contentValues.put("id", movie.getId());
-//                contentValues.put("name", movie.getTitle());
-//                contentValues.put("poster_path", movie.getPosterPath());
-//                contentValues.put("backdrop_path", movie.getBackdropPath());
-//                contentValues.put("overview", movie.getOverview());
-//                contentValues.put("release_date", movie.getReleaseDate());
-//                contentValues.put("vote_average", movie.getVoteAverage());
-//
-//                DatabaseProvider databaseProvider = new DatabaseProvider();
-//                databaseProvider.insert(URI_MOVIE, contentValues);
-
-                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
-                FavouriteWidget favouriteWidget = new FavouriteWidget();
-//                ComponentName componentName = new ComponentName(getApplicationContext(), StackWidgetService.class);
-                int[] widgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, StackWidgetService.class));
-
-                favouriteWidget.onUpdate(getApplicationContext(), appWidgetManager, widgetIds);
             } else {
                 RoomConfig.getInstance(this).tvShowDao().addToFavourite(tvShow);
             }
