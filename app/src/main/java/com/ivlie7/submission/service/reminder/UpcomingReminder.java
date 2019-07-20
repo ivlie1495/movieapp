@@ -24,6 +24,7 @@ public class UpcomingReminder extends BroadcastReceiver {
 
     private static final int NOTIFICATION_ID = 1;
     private static final String NOTIFICATION_CHANNEL_ID = "1";
+    private static CharSequence NOTIFICATION_CHANNEL_NAME = "Movie Channel";
 
     public UpcomingReminder() {
 
@@ -56,7 +57,7 @@ public class UpcomingReminder extends BroadcastReceiver {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "NOTIFICATION_CHANNEL_NAME", importance);
+            NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, importance);
 
             builder.setChannelId(NOTIFICATION_CHANNEL_ID);
             notificationManager.createNotificationChannel(notificationChannel);
