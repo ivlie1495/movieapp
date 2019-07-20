@@ -13,6 +13,5 @@ public class StackWidgetService extends RemoteViewsService {
     @Override
     public void onCreate() {
         super.onCreate();
-
     }
 }
