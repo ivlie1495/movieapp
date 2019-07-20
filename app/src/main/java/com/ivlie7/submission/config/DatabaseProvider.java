@@ -1,6 +1,5 @@
 package com.ivlie7.submission.config;
 
-import android.appwidget.AppWidgetManager;
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -45,10 +44,10 @@ public class DatabaseProvider extends ContentProvider {
 
             MovieDao movieDao = RoomConfig.getInstance(context).movieDao();
             Cursor cursor = null;
-            if (match == CODE_MOVIE_DIR) {
+            if (match == CODE_MOVIE_DIR && uri != null) {
                 cursor = movieDao.getAllFavouriteMovie();
+                cursor.setNotificationUri(context.getContentResolver(), uri);
             }
-            cursor.setNotificationUri(context.getContentResolver(), uri);
 
             return cursor;
         } else {
@@ -75,19 +74,15 @@ public class DatabaseProvider extends ContentProvider {
         switch (URI_MATCHER.match(uri)) {
             case CODE_MOVIE_DIR:
                 Context context = getContext();
+                long id = 0;
                 if (context == null) {
                     return null;
                 }
 
-                long id = RoomConfig.getInstance(context)
-                        .movieDao()
-                        .addToFavourite(Movie.fromContentValues(values));
-
-                if (uri != null) {
+                if (uri != null && values != null) {
                     context.getContentResolver().notifyChange(uri, null);
+                    id = RoomConfig.getInstance(context).movieDao().addToFavourite(Movie.fromContentValues(values));
                 }
-
-//                AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged();
 
                 return ContentUris.withAppendedId(uri, id);
             case CODE_MOVIE_ITEM:
@@ -132,7 +127,7 @@ public class DatabaseProvider extends ContentProvider {
                     return 0;
                 }
 
-                if (uri != null) {
+                if (values != null && uri != null) {
                     Movie movie = Movie.fromContentValues(values);
                     movie.setId((int) ContentUris.parseId(uri));
 

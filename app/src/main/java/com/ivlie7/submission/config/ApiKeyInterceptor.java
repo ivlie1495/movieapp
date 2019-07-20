@@ -1,5 +1,7 @@
 package com.ivlie7.submission.config;
 
+import android.support.annotation.NonNull;
+
 import com.ivlie7.submission.constant.ApiConstants;
 
 import java.io.IOException;
@@ -17,8 +19,9 @@ public class ApiKeyInterceptor implements Interceptor {
         this.language = language;
     }
 
+    @NonNull
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@NonNull Chain chain) throws IOException {
         HttpUrl httpUrl = chain.request()
                 .url()
                 .newBuilder()
