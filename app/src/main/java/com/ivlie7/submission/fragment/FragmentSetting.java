@@ -46,16 +46,16 @@ public class FragmentSetting extends PreferenceFragmentCompat implements Setting
         super.onCreate(savedInstanceState);
         if (getActivity() != null) {
             ButterKnife.bind(this, getActivity());
+
+            upcomingReminder = new UpcomingReminder();
+            dailyReminder = new DailyReminder();
+
+            findPreference(dailyReminderKey).setOnPreferenceChangeListener(this);
+            findPreference(upcomingReminderKey).setOnPreferenceChangeListener(this);
+            findPreference(settingLocaleKey).setOnPreferenceClickListener(this);
+
+            settingPresenter = new SettingPresenter(this, getString(R.string.set_language));
         }
-
-        upcomingReminder = new UpcomingReminder();
-        dailyReminder = new DailyReminder();
-
-        findPreference(dailyReminderKey).setOnPreferenceChangeListener(this);
-        findPreference(upcomingReminderKey).setOnPreferenceChangeListener(this);
-        findPreference(settingLocaleKey).setOnPreferenceClickListener(this);
-
-        settingPresenter = new SettingPresenter(this, getString(R.string.set_language));
     }
 
     @Override
