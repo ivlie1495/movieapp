@@ -32,6 +32,7 @@ public class FragmentSetting extends PreferenceFragmentCompat implements Setting
 
     private SettingPresenter settingPresenter;
     private UpcomingReminder upcomingReminder;
+    private DailyReminder dailyReminder;
 
     private List<Movie> movies = new ArrayList<>();
 
@@ -47,6 +48,7 @@ public class FragmentSetting extends PreferenceFragmentCompat implements Setting
             ButterKnife.bind(this, getActivity());
 
             upcomingReminder = new UpcomingReminder();
+            dailyReminder = new DailyReminder();
 
             findPreference(dailyReminderKey).setOnPreferenceChangeListener(this);
             findPreference(upcomingReminderKey).setOnPreferenceChangeListener(this);
@@ -72,8 +74,6 @@ public class FragmentSetting extends PreferenceFragmentCompat implements Setting
     public boolean onPreferenceChange(Preference preference, Object o) {
         String key = preference.getKey();
         boolean isOn = (boolean) o;
-
-        DailyReminder dailyReminder = new DailyReminder();
 
         if (key.equals(dailyReminderKey)) {
             if (isOn) {
