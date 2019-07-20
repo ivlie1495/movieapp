@@ -89,10 +89,6 @@ public class DailyReminder extends BroadcastReceiver {
 
     private static PendingIntent getPendingIntent(Context context) {
         Intent intent = new Intent(context, DailyReminder.class);
-
-//        boolean isAlarmOn = (PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_NO_CREATE) != null);
-//        Log.d("isAlarmOn : ", String.valueOf(isAlarmOn));
-
         return PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 }

@@ -24,11 +24,9 @@ public class StackRemoveViewsFactory implements RemoteViewsService.RemoteViewsFa
 
     private Context context;
     private Cursor cursor;
-    private int appWidgetId;
 
-    StackRemoveViewsFactory(Context context, Intent intent) {
+    StackRemoveViewsFactory(Context context) {
         this.context = context;
-        appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
     @Override

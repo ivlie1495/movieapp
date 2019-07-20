@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.model.Movie;
@@ -25,7 +24,6 @@ public class UpcomingReminder extends BroadcastReceiver {
 
     public static final int NOTIFICATION_ID = 1;
     public static final String NOTIFICATION_CHANNEL_ID = "1";
-    private static int notificationId = 1;
 
     public UpcomingReminder() {
 
@@ -68,8 +66,8 @@ public class UpcomingReminder extends BroadcastReceiver {
     }
 
     public void setRepeatReminder(Context context, List<Movie> movies) {
-
         int delay = 0;
+        int notificationId = 1;
 
         for (Movie movie : movies) {
             cancelReminder(context);
@@ -96,7 +94,6 @@ public class UpcomingReminder extends BroadcastReceiver {
 
             notificationId += 1;
             delay += 5000;
-            Log.d("title", movie.getTitle());
         }
     }
 
@@ -107,12 +104,6 @@ public class UpcomingReminder extends BroadcastReceiver {
 
     private static PendingIntent getPendingIntent(Context context) {
         Intent intent = new Intent(context, DailyReminder.class);
-
-//        boolean isAlarmOn = (PendingIntent.getBroadcast(context, notificationId, intent,
-//                PendingIntent.FLAG_NO_CREATE) != null);
-//        Log.d("isAlarmOn : ", String.valueOf(isAlarmOn));
-//        Log.d("id_when_cancel", String.valueOf(notificationId));
-
         return PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 }

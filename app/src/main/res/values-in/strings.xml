@@ -12,6 +12,7 @@
     <string name="favourite" translatable="false">Favorit</string>
     <string name="search" translatable="false">Cari</string>
     <string name="no_favourite" translatable="false">Tidak Ada Favorit</string>
+    <string name="banner" translatable="false">Spanduk</string>
 
     <string name="action_setting" translatable="false">Pengaturan</string>
     <string name="action_notification" translatable="false">notifikasi</string>

@@ -22,9 +22,7 @@
     <string name="search" translatable="false">Search</string>
     <string name="no_favourite" translatable="false">No Favourite</string>
     <string name="setting" translatable="false">Setting</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
-    <string name="banner">Banner</string>
+    <string name="banner" translatable="false">Banner</string>
 
     <string name="action_setting" translatable="false">Settings</string>
     <string name="action_notification" translatable="false">Notifications</string>
@@ -39,5 +37,4 @@
     <string name="localization_setting" translatable="false">Change Your Phone Localization</string>
     <string name="daily_reminder_message" translatable="false">Hi, come and see what is the new movie today!</string>
     <string name="upcoming_reminder_message" translatable="false">Hi, %s is release today!</string>
-
 </resources>
