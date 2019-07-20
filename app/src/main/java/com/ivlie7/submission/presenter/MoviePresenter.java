@@ -1,6 +1,7 @@
 package com.ivlie7.submission.presenter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.ivlie7.submission.config.ApiConfig;
 import com.ivlie7.submission.config.RoomConfig;
@@ -36,7 +37,7 @@ public class MoviePresenter {
         movieView.showLoading();
         apiService.enqueue(new Callback<MovieResponse>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 movieView.hideLoading();
                 if (response.body() != null) {
                     List<Movie> movieList = response.body().getGetMovieList();
@@ -47,7 +48,7 @@ public class MoviePresenter {
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
                 movieView.hideLoading();
                 if (movies != null) {
                     movieView.getMovieList(movies);
@@ -74,7 +75,7 @@ public class MoviePresenter {
         movieView.showLoading();
         apiService.enqueue(new Callback<MovieResponse>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.body() != null) {
                     List<Movie> movieList = response.body().getGetMovieList();
                     movieView.getMovieList(movieList);
@@ -85,7 +86,7 @@ public class MoviePresenter {
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
                 movieView.hideLoading();
                 if (oriListMovie != null) {
                     movieView.getMovieList(filterList(query, oriListMovie));

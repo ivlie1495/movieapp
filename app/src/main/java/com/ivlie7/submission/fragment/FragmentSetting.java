@@ -44,7 +44,9 @@ public class FragmentSetting extends PreferenceFragmentCompat implements Setting
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this, getActivity());
+        if (getActivity() != null) {
+            ButterKnife.bind(this, getActivity());
+        }
 
         upcomingReminder = new UpcomingReminder();
         dailyReminder = new DailyReminder();

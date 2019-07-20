@@ -1,5 +1,7 @@
 package com.ivlie7.submission.presenter;
 
+import android.support.annotation.NonNull;
+
 import com.ivlie7.submission.config.ApiConfig;
 import com.ivlie7.submission.model.Movie;
 import com.ivlie7.submission.model.MovieResponse;
@@ -27,7 +29,7 @@ public class SettingPresenter {
         Call<MovieResponse> apiService = apiConfig.getService().getListMovie();
         apiService.enqueue(new Callback<MovieResponse>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
+            public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.body() != null) {
                     List<Movie> movieList = response.body().getGetMovieList();
                     for (Movie movie : movieList) {
@@ -39,7 +41,7 @@ public class SettingPresenter {
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
 
             }
         });

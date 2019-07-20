@@ -1,6 +1,7 @@
 package com.ivlie7.submission.presenter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.ivlie7.submission.config.ApiConfig;
 import com.ivlie7.submission.config.RoomConfig;
@@ -36,7 +37,7 @@ public class TvShowPresenter {
         tvShowView.showLoading();
         apiService.enqueue(new Callback<TvShowResponse>() {
             @Override
-            public void onResponse(Call<TvShowResponse> call, Response<TvShowResponse> response) {
+            public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
                 tvShowView.hideLoading();
                 if (response.body() != null) {
                     List<TvShow> tvShowList = response.body().getTvShowList();
@@ -47,7 +48,7 @@ public class TvShowPresenter {
             }
 
             @Override
-            public void onFailure(Call<TvShowResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<TvShowResponse> call, @NonNull Throwable t) {
                 tvShowView.hideLoading();
                 if (tvShows != null) {
                     tvShowView.getTvShowList(tvShows);
@@ -74,7 +75,7 @@ public class TvShowPresenter {
         tvShowView.showLoading();
         apiService.enqueue(new Callback<TvShowResponse>() {
             @Override
-            public void onResponse(Call<TvShowResponse> call, Response<TvShowResponse> response) {
+            public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
                 if (response.body() != null) {
                     List<TvShow> tvShowList = response.body().getTvShowList();
                     tvShowView.getTvShowList(tvShowList);
@@ -85,7 +86,7 @@ public class TvShowPresenter {
             }
 
             @Override
-            public void onFailure(Call<TvShowResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<TvShowResponse> call, @NonNull Throwable t) {
                 tvShowView.hideLoading();
                 if (oriListTvShow != null) {
                     tvShowView.getTvShowList(filterList(query, oriListTvShow));
