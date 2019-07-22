@@ -1,4 +1,4 @@
-package com.ivlie7.submission.config;
+package com.ivlie7.favourite.config;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -9,12 +9,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 
-import com.ivlie7.submission.dao.MovieDao;
-import com.ivlie7.submission.model.Movie;
+import com.ivlie7.favourite.dao.MovieDao;
+import com.ivlie7.favourite.model.Movie;
 
 public class DatabaseProvider extends ContentProvider {
 
-    private static final String AUTHORITY = "com.ivlie7.submission";
+    private static final String AUTHORITY = "com.ivlie7.favourite";
     public static final Uri URI_MOVIE = Uri.parse("content://" + AUTHORITY + "/Movie");
 
     private static final int CODE_MOVIE_DIR = 1;
