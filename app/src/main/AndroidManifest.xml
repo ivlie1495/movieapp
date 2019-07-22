@@ -4,6 +4,8 @@
     package="com.ivlie7.submission">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <permission android:name="com.ivlie7.submission.READ_DATABASE" android:protectionLevel="normal" />
+    <permission android:name="com.ivlie7.submission.WRITE_DATABASE" android:protectionLevel="normal" />
 
     <application
         android:allowBackup="true"

@@ -1,26 +1,27 @@
-package com.ivlie7.favourite.adapter;
+package com.ivlie7.favourite;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.ivlie7.favourite.R;
-import com.ivlie7.favourite.base.BaseViewHolder;
-import com.ivlie7.favourite.constant.ApiConstants;
-import com.ivlie7.favourite.model.Movie;
+import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
+    private final ArrayList<Movie> movies = new ArrayList<>();
     private Context context;
-    private Cursor mCursor;
 
     public MovieAdapter(Context context) {
         this.context = context;
+    }
+
+    public void setListNotes(ArrayList<Movie> movies) {
+        this.movies.clear();
+        this.movies.addAll(movies);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -32,28 +33,15 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder baseViewHolder, int i) {
-        Movie movie = getItem(i);
+        Movie movie = movies.get(i);
         baseViewHolder.textViewTitle.setText(movie.getTitle());
         baseViewHolder.textViewRelease.setText(movie.getReleaseDate());
         baseViewHolder.textViewRating.setText(String.valueOf(movie.getVoteAverage()));
-        Glide.with(context).load(ApiConstants.API_POSTER + movie.getPosterPath()).into(baseViewHolder.imageViewPoster);
+//        Glide.with(context).load(ApiConstants.API_POSTER + movie.getPosterPath()).into(baseViewHolder.imageViewPoster);
     }
 
     @Override
     public int getItemCount() {
-        return mCursor == null ? 0 : mCursor.getCount();
-    }
-
-    public void setMovie(Cursor cursor) {
-        mCursor = cursor;
-        notifyDataSetChanged();
-    }
-
-    private Movie getItem(int i) {
-        if (!mCursor.moveToPosition(i)) {
-            throw new IllegalStateException("No Position Found!");
-        }
-
-        return new Movie(mCursor);
+        return movies.size();
     }
 }

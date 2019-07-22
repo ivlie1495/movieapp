@@ -1,4 +1,4 @@
-package com.ivlie7.favourite.base;
+package com.ivlie7.favourite;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

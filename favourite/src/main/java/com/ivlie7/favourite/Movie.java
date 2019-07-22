@@ -1,40 +1,17 @@
-package com.ivlie7.favourite.model;
+package com.ivlie7.favourite;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-@Entity(tableName = "Movie")
 public class Movie implements Parcelable {
 
-    public Movie() {
-
-    }
-
-    @PrimaryKey
-    @ColumnInfo(name = "id")
     private int id;
-
-    @ColumnInfo(name = "name")
     private String title;
-
-    @ColumnInfo(name = "poster_path")
     private String posterPath;
-
-    @ColumnInfo(name = "backdrop_path")
     private String backdropPath;
-
-    @ColumnInfo(name = "overview")
     private String overview;
-
-    @ColumnInfo(name = "release_date")
     private String releaseDate;
-
-    @ColumnInfo(name = "vote_average")
     private float voteAverage;
 
     private Movie(Parcel in) {
@@ -59,17 +36,14 @@ public class Movie implements Parcelable {
         }
     };
 
-    public static Movie fromContentValues(ContentValues values) {
-        Movie movie = new Movie();
-        movie.setId(values.getAsInteger("id"));
-        movie.setTitle(values.getAsString("name"));
-        movie.setPosterPath(values.getAsString("poster_path"));
-        movie.setBackdropPath(values.getAsString("backdrop_path"));
-        movie.setOverview(values.getAsString("overview"));
-        movie.setReleaseDate(values.getAsString("release_date"));
-        movie.setVoteAverage(values.getAsFloat("vote_average"));
-
-        return movie;
+    public Movie(int id, String title, String posterPath, String backdropPath, String overview, String releaseDate, float voteAverage) {
+        this.id = id;
+        this.title = title;
+        this.posterPath = posterPath;
+        this.backdropPath = backdropPath;
+        this.overview = overview;
+        this.releaseDate = releaseDate;
+        this.voteAverage = voteAverage;
     }
 
     public Movie(Cursor cursor) {
