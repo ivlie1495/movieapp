@@ -1,12 +1,14 @@
-package com.ivlie7.favourite;
+package com.ivlie7.favourite.config;
 
 import android.database.Cursor;
 
+import com.ivlie7.favourite.model.Movie;
+
 import java.util.ArrayList;
 
-class MappingHelper {
+public class MappingHelper {
 
-    static ArrayList<Movie> mapCursorToArrayList(Cursor cursor) {
+    public static ArrayList<Movie> mapCursorToArrayList(Cursor cursor) {
         ArrayList<Movie> movies = new ArrayList<>();
 
         while (cursor.moveToNext()) {

@@ -1,10 +1,12 @@
-package com.ivlie7.favourite;
+package com.ivlie7.favourite.base;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.ivlie7.favourite.R;
 
 public class BaseViewHolder extends RecyclerView.ViewHolder {
 
