@@ -1,8 +1,6 @@
 package com.ivlie7.submission.service.widget;
 
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Binder;
@@ -18,7 +16,7 @@ import com.ivlie7.submission.constant.ApiConstants;
 
 import java.util.concurrent.ExecutionException;
 
-import static com.ivlie7.submission.config.DatabaseProvider.URI_MOVIE;
+import static com.ivlie7.submission.config.DatabaseProvider.CONTENT_URI;
 
 class StackRemoveViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
@@ -41,7 +39,7 @@ class StackRemoveViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         }
 
         long identityToken = Binder.clearCallingIdentity();
-        cursor = context.getContentResolver().query(URI_MOVIE, null, null, null, null);
+        cursor = context.getContentResolver().query(CONTENT_URI, null, null, null, null);
         Binder.restoreCallingIdentity(identityToken);
     }
 

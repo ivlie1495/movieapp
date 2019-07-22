@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Sw
     SwipeRefreshLayout swipeRefresh;
 
     private MovieAdapter movieAdapter;
-    private DataObserver myObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Sw
         HandlerThread handlerThread = new HandlerThread("DataObserver");
         handlerThread.start();
         Handler handler = new Handler(handlerThread.getLooper());
-        myObserver = new DataObserver(handler, this);
+        DataObserver myObserver = new DataObserver(handler, this);
         getContentResolver().registerContentObserver(CONTENT_URI, true, myObserver);
         new getData(this, this).execute();
 
@@ -75,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Sw
         private final WeakReference<Context> weakContext;
         private final WeakReference<MovieCallback> weakCallback;
 
-
         private getData(Context context, MovieCallback callback) {
             weakContext = new WeakReference<>(context);
             weakCallback = new WeakReference<>(callback);
@@ -91,11 +89,9 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Sw
             super.onPostExecute(data);
             weakCallback.get().postExecute(data);
         }
-
     }
 
     static class DataObserver extends ContentObserver {
-
         final Context context;
 
         DataObserver(Handler handler, Context context) {

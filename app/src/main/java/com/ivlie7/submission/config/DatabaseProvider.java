@@ -15,7 +15,13 @@ import com.ivlie7.submission.model.Movie;
 public class DatabaseProvider extends ContentProvider {
 
     private static final String AUTHORITY = "com.ivlie7.submission";
-    public static final Uri URI_MOVIE = Uri.parse("content://" + AUTHORITY + "/Movie");
+    private static final String SCHEME = "content";
+    private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
+    public static final Uri CONTENT_URI = new Uri.Builder().scheme(SCHEME)
+            .authority(AUTHORITY)
+            .appendPath("Movie")
+            .build();
 
     private static final int CODE_MOVIE_DIR = 1;
     private static final int CODE_MOVIE_ITEM = 2;
@@ -23,8 +29,8 @@ public class DatabaseProvider extends ContentProvider {
     private static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        URI_MATCHER.addURI(AUTHORITY, "Movie", CODE_MOVIE_DIR);
-        URI_MATCHER.addURI(AUTHORITY, "Movie" + "/*", CODE_MOVIE_ITEM);
+        uriMatcher.addURI(AUTHORITY, "Movie", CODE_MOVIE_DIR);
+        uriMatcher.addURI(AUTHORITY, "Movie" + "/#", CODE_MOVIE_ITEM);
     }
 
     @Override
