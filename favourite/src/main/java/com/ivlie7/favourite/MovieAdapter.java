@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
@@ -37,7 +39,7 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         baseViewHolder.textViewTitle.setText(movie.getTitle());
         baseViewHolder.textViewRelease.setText(movie.getReleaseDate());
         baseViewHolder.textViewRating.setText(String.valueOf(movie.getVoteAverage()));
-//        Glide.with(context).load(ApiConstants.API_POSTER + movie.getPosterPath()).into(baseViewHolder.imageViewPoster);
+        Glide.with(context).load(ApiConstants.API_POSTER + movie.getPosterPath()).into(baseViewHolder.imageViewPoster);
     }
 
     @Override
