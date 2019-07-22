@@ -10,8 +10,12 @@ import android.os.HandlerThread;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.ivlie7.favourite.config.MovieCallback;
+import com.ivlie7.favourite.model.Movie;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -19,8 +23,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.ivlie7.favourite.DatabaseContract.CONTENT_URI;
-import static com.ivlie7.favourite.MappingHelper.mapCursorToArrayList;
+import static com.ivlie7.favourite.config.DatabaseContract.CONTENT_URI;
+import static com.ivlie7.favourite.config.MappingHelper.mapCursorToArrayList;
 
 public class MainActivity extends AppCompatActivity implements MovieCallback, SwipeRefreshLayout.OnRefreshListener {
 
@@ -68,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Sw
             Toast.makeText(this, "Tidak Ada data saat ini", Toast.LENGTH_SHORT).show();
             movieAdapter.setMovies(new ArrayList<Movie>());
         }
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private static class getData extends AsyncTask<Void, Void, Cursor> {

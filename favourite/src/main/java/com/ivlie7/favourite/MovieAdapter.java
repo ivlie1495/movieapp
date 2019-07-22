@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.ivlie7.favourite.R;
+import com.ivlie7.favourite.base.BaseViewHolder;
+import com.ivlie7.favourite.constant.ApiConstants;
+import com.ivlie7.favourite.model.Movie;
 
 import java.util.ArrayList;
 
