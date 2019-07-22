@@ -14,6 +14,7 @@ import com.ivlie7.favourite.constant.ApiConstants;
 import com.ivlie7.favourite.model.Movie;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
@@ -24,7 +25,7 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         this.context = context;
     }
 
-    public void setMovies(ArrayList<Movie> movies) {
+    public void setMovies(List<Movie> movies) {
         this.movies.clear();
         this.movies.addAll(movies);
         notifyDataSetChanged();

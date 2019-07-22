@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,6 +20,7 @@ import com.ivlie7.favourite.model.Movie;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 import static com.ivlie7.favourite.config.DatabaseContract.CONTENT_URI;
 import static com.ivlie7.favourite.config.MappingHelper.mapCursorToArrayList;
 
-public class MainActivity extends AppCompatActivity implements MovieCallback, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends AppCompatActivity implements MovieCallback {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -36,10 +36,8 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Sw
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    @BindView(R.id.swipeRefresh)
-    SwipeRefreshLayout swipeRefresh;
-
     private MovieAdapter movieAdapter;
+    private List<Movie> movieList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,23 +54,17 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Sw
         DataObserver myObserver = new DataObserver(handler, this);
         getContentResolver().registerContentObserver(CONTENT_URI, true, myObserver);
         new getData(this, this).execute();
-
-        swipeRefresh.setOnRefreshListener(this);
-    }
-
-    @Override
-    public void onRefresh() {
-        swipeRefresh.setRefreshing(false);
     }
 
     @Override
     public void postExecute(Cursor cursor) {
-        ArrayList<Movie> movies = mapCursorToArrayList(cursor);
+        List<Movie> movies = mapCursorToArrayList(cursor);
         if (movies.size() > 0) {
+            movieList = movies;
             movieAdapter.setMovies(movies);
         } else {
             Toast.makeText(this, "Tidak Ada Data Saat Ini", Toast.LENGTH_SHORT).show();
-            movieAdapter.setMovies(new ArrayList<Movie>());
+            movieAdapter.setMovies(movieList);
         }
         progressBar.setVisibility(View.INVISIBLE);
     }
