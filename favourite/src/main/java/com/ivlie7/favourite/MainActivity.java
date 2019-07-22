@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Sw
     public void postExecute(Cursor cursor) {
         ArrayList<Movie> movies = mapCursorToArrayList(cursor);
         if (movies.size() > 0) {
-            movieAdapter.setListNotes(movies);
+            movieAdapter.setMovies(movies);
         } else {
             Toast.makeText(this, "Tidak Ada data saat ini", Toast.LENGTH_SHORT).show();
-            movieAdapter.setListNotes(new ArrayList<Movie>());
+            movieAdapter.setMovies(new ArrayList<Movie>());
         }
     }
 

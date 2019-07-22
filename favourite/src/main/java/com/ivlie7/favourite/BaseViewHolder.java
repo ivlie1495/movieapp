@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ivlie7.favourite.R;
-
 public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     public TextView textViewTitle, textViewRating, textViewRelease;

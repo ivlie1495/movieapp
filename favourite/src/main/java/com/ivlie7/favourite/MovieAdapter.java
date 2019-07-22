@@ -18,7 +18,7 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         this.context = context;
     }
 
-    public void setListNotes(ArrayList<Movie> movies) {
+    public void setMovies(ArrayList<Movie> movies) {
         this.movies.clear();
         this.movies.addAll(movies);
         notifyDataSetChanged();
