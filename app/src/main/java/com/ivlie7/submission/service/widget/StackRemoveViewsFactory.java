@@ -45,9 +45,7 @@ class StackRemoveViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     @Override
     public void onDestroy() {
-        if (cursor != null) {
-            cursor.close();
-        }
+
     }
 
     @Override

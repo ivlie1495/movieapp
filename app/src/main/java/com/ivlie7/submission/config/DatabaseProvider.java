@@ -16,7 +16,7 @@ public class DatabaseProvider extends ContentProvider {
 
     private static final String AUTHORITY = "com.ivlie7.submission";
     private static final String SCHEME = "content";
-    private static final UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    private static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 
     public static final Uri CONTENT_URI = new Uri.Builder().scheme(SCHEME)
             .authority(AUTHORITY)
@@ -26,11 +26,9 @@ public class DatabaseProvider extends ContentProvider {
     private static final int CODE_MOVIE_DIR = 1;
     private static final int CODE_MOVIE_ITEM = 2;
 
-    private static final UriMatcher URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
-
     static {
-        uriMatcher.addURI(AUTHORITY, "Movie", CODE_MOVIE_DIR);
-        uriMatcher.addURI(AUTHORITY, "Movie" + "/#", CODE_MOVIE_ITEM);
+        URI_MATCHER.addURI(AUTHORITY, "Movie", CODE_MOVIE_DIR);
+        URI_MATCHER.addURI(AUTHORITY, "Movie" + "/*", CODE_MOVIE_ITEM);
     }
 
     @Override
