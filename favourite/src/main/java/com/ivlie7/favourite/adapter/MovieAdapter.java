@@ -1,4 +1,4 @@
-package com.ivlie7.favourite;
+package com.ivlie7.favourite.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -40,10 +40,12 @@ public class MovieAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder baseViewHolder, int i) {
         Movie movie = movies.get(i);
-        baseViewHolder.textViewTitle.setText(movie.getTitle());
-        baseViewHolder.textViewRelease.setText(movie.getReleaseDate());
-        baseViewHolder.textViewRating.setText(String.valueOf(movie.getVoteAverage()));
-        Glide.with(context).load(ApiConstants.API_POSTER + movie.getPosterPath()).into(baseViewHolder.imageViewPoster);
+        if (movie != null) {
+            baseViewHolder.textViewTitle.setText(movie.getTitle());
+            baseViewHolder.textViewRelease.setText(movie.getReleaseDate());
+            baseViewHolder.textViewRating.setText(String.valueOf(movie.getVoteAverage()));
+            Glide.with(context).load(ApiConstants.API_POSTER + movie.getPosterPath()).into(baseViewHolder.imageViewPoster);
+        }
     }
 
     @Override

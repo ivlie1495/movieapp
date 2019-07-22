@@ -1,4 +1,4 @@
-package com.ivlie7.favourite;
+package com.ivlie7.favourite.ui;
 
 import android.content.Context;
 import android.database.ContentObserver;
@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.ivlie7.favourite.adapter.MovieAdapter;
+import com.ivlie7.favourite.R;
 import com.ivlie7.favourite.config.MovieCallback;
 import com.ivlie7.favourite.model.Movie;
 
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Sw
         if (movies.size() > 0) {
             movieAdapter.setMovies(movies);
         } else {
-            Toast.makeText(this, "Tidak Ada data saat ini", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tidak Ada Data Saat Ini", Toast.LENGTH_SHORT).show();
             movieAdapter.setMovies(new ArrayList<Movie>());
         }
         progressBar.setVisibility(View.INVISIBLE);

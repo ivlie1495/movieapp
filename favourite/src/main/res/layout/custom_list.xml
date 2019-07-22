@@ -19,7 +19,7 @@
                 android:id="@+id/ivMovie"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/poster"
                 android:src="@drawable/poster_a_start_is_born" />
 
             <LinearLayout
@@ -61,13 +61,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/tvRating"
-                        android:text="/" />
+                        android:text="@string/slash" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/tvSlash"
-                        android:text="0" />
+                        android:text="@string/score" />
 
                 </RelativeLayout>
 

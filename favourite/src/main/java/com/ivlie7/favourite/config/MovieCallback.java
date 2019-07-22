@@ -1,7 +1,7 @@
-package com.ivlie7.favourite;
+package com.ivlie7.favourite.config;
 
 import android.database.Cursor;
 
-interface MovieCallback {
+public interface MovieCallback {
     void postExecute(Cursor cursor);
 }

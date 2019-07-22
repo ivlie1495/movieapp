@@ -15,7 +15,9 @@ import android.support.v4.content.ContextCompat;
 
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.model.Movie;
+import com.ivlie7.submission.presenter.SettingPresenter;
 import com.ivlie7.submission.ui.MainActivity;
+import com.ivlie7.submission.util.DateUtils;
 
 import java.util.Calendar;
 import java.util.List;
@@ -32,9 +34,14 @@ public class UpcomingReminder extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        int notificationId = intent.getIntExtra("id", 0);
-        String title = intent.getStringExtra("title");
-        showReminderNotification(context, title, notificationId);
+        int notificationId = 1;
+        List<Movie> upcomingMovieList = getUpcomingMovieList(context);
+        for (Movie movie : upcomingMovieList) {
+            if (movie.getReleaseDate().equals(DateUtils.getCurrentDate())) {
+                showReminderNotification(context, movie.getTitle(), notificationId);
+                notificationId++;
+            }
+        }
     }
 
     private void showReminderNotification(Context context, String title, int notificationId) {
@@ -66,36 +73,31 @@ public class UpcomingReminder extends BroadcastReceiver {
         notificationManager.notify(notificationId, builder.build());
     }
 
-    public void setRepeatReminder(Context context, List<Movie> movies) {
-        int delay = 0;
-        int notificationId = 1;
+    public void setRepeatReminder(Context context) {
+        cancelReminder(context);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, UpcomingReminder.class);
 
-        for (Movie movie : movies) {
-            cancelReminder(context);
-            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(context, UpcomingReminder.class);
-            intent.putExtra("title", movie.getTitle());
-            intent.putExtra("id", notificationId);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, 8);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-
-            int SDK_INT = Build.VERSION.SDK_INT;
-            if (SDK_INT < Build.VERSION_CODES.KITKAT) {
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + delay, pendingIntent);
-            } else if (SDK_INT > Build.VERSION_CODES.KITKAT && SDK_INT < Build.VERSION_CODES.M) {
-                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + delay, AlarmManager.INTERVAL_DAY, pendingIntent);
-            } else if (SDK_INT >= Build.VERSION_CODES.M) {
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() + delay, pendingIntent);
-            }
-
-            notificationId += 1;
-            delay += 5000;
+        int SDK_INT = Build.VERSION.SDK_INT;
+        if (SDK_INT < Build.VERSION_CODES.KITKAT) {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        } else if (SDK_INT > Build.VERSION_CODES.KITKAT && SDK_INT < Build.VERSION_CODES.M) {
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        } else if (SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
         }
+    }
+
+    private List<Movie> getUpcomingMovieList(Context context) {
+        SettingPresenter settingPresenter = new SettingPresenter(context.getString(R.string.set_language));
+        return settingPresenter.getUpcomingMovie();
     }
 
     public void cancelReminder(Context context) {

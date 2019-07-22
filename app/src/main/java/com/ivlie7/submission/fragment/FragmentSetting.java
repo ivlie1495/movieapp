@@ -7,19 +7,13 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
 import com.ivlie7.submission.R;
-import com.ivlie7.submission.model.Movie;
-import com.ivlie7.submission.presenter.SettingPresenter;
 import com.ivlie7.submission.service.reminder.DailyReminder;
 import com.ivlie7.submission.service.reminder.UpcomingReminder;
-import com.ivlie7.submission.view.SettingView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindString;
 import butterknife.ButterKnife;
 
-public class FragmentSetting extends PreferenceFragmentCompat implements SettingView, Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+public class FragmentSetting extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
     @BindString(R.string.setting_locale_key)
     String settingLocaleKey;
@@ -30,11 +24,11 @@ public class FragmentSetting extends PreferenceFragmentCompat implements Setting
     @BindString(R.string.upcoming_reminder_key)
     String upcomingReminderKey;
 
-    private SettingPresenter settingPresenter;
+//    private SettingPresenter settingPresenter;
     private UpcomingReminder upcomingReminder;
     private DailyReminder dailyReminder;
 
-    private List<Movie> movies = new ArrayList<>();
+//    private List<Movie> movies = new ArrayList<>();
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
@@ -54,21 +48,21 @@ public class FragmentSetting extends PreferenceFragmentCompat implements Setting
             findPreference(upcomingReminderKey).setOnPreferenceChangeListener(this);
             findPreference(settingLocaleKey).setOnPreferenceClickListener(this);
 
-            settingPresenter = new SettingPresenter(this, getString(R.string.set_language));
+//            settingPresenter = new SettingPresenter(this, getString(R.string.set_language));
         }
     }
 
-    @Override
-    public void setReminder(Movie movie) {
-        movies.clear();
-        movies.add(movie);
-        upcomingReminder.setRepeatReminder(getContext(), movies);
-    }
-
-    @Override
-    public void cancelReminder() {
-        upcomingReminder.cancelReminder(getContext());
-    }
+//    @Override
+//    public void setReminder(Movie movie) {
+//        movies.clear();
+//        movies.add(movie);
+//        upcomingReminder.setRepeatReminder(getContext(), movies);
+//    }
+//
+//    @Override
+//    public void cancelReminder() {
+//        upcomingReminder.cancelReminder(getContext());
+//    }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
@@ -83,9 +77,11 @@ public class FragmentSetting extends PreferenceFragmentCompat implements Setting
             }
         } else {
             if (isOn) {
-                settingPresenter.setReminder();
+                upcomingReminder.setRepeatReminder(getContext());
+//                settingPresenter.setReminder();
             } else {
-                settingPresenter.cancelReminder();
+//                settingPresenter.cancelReminder();
+                upcomingReminder.cancelReminder(getContext());
             }
         }
 

@@ -1,6 +1,5 @@
-package com.ivlie7.favourite;
+package com.ivlie7.favourite.model;
 
-import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -44,16 +43,6 @@ public class Movie implements Parcelable {
         this.overview = overview;
         this.releaseDate = releaseDate;
         this.voteAverage = voteAverage;
-    }
-
-    public Movie(Cursor cursor) {
-        this.id = cursor.getInt(cursor.getColumnIndex("id"));
-        this.title = cursor.getString(cursor.getColumnIndex("name"));
-        this.posterPath = cursor.getString(cursor.getColumnIndex("poster_path"));
-        this.backdropPath = cursor.getString(cursor.getColumnIndex("backdrop_path"));
-        this.overview = cursor.getString(cursor.getColumnIndex("overview"));
-        this.releaseDate = cursor.getString(cursor.getColumnIndex("release_date"));
-        this.voteAverage = cursor.getFloat(cursor.getColumnIndex("vote_average"));
     }
 
     @Override
