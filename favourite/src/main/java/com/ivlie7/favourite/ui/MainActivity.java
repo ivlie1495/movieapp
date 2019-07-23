@@ -19,7 +19,6 @@ import com.ivlie7.favourite.config.MovieCallback;
 import com.ivlie7.favourite.model.Movie;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
