@@ -18,15 +18,18 @@ import com.ivlie7.submission.model.Movie;
 import com.ivlie7.submission.presenter.SettingPresenter;
 import com.ivlie7.submission.ui.MainActivity;
 import com.ivlie7.submission.util.DateUtils;
+import com.ivlie7.submission.view.SettingView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class UpcomingReminder extends BroadcastReceiver {
+public class UpcomingReminder extends BroadcastReceiver implements SettingView {
 
     private static final int NOTIFICATION_ID = 1;
     private static final String NOTIFICATION_CHANNEL_ID = "1";
     private static CharSequence NOTIFICATION_CHANNEL_NAME = "Movie Channel";
+    private List<Movie> upcomingMovieList = new ArrayList<>();
 
     public UpcomingReminder() {
 
@@ -34,14 +37,8 @@ public class UpcomingReminder extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        int notificationId = 1;
-        List<Movie> upcomingMovieList = getUpcomingMovieList(context);
-        for (Movie movie : upcomingMovieList) {
-            if (movie.getReleaseDate().equals(DateUtils.getCurrentDate())) {
-                showReminderNotification(context, movie.getTitle(), notificationId);
-                notificationId++;
-            }
-        }
+        SettingPresenter settingPresenter = new SettingPresenter(this, context.getString(R.string.set_language));
+        settingPresenter.getUpcomingMovie(context);
     }
 
     private void showReminderNotification(Context context, String title, int notificationId) {
@@ -95,11 +92,6 @@ public class UpcomingReminder extends BroadcastReceiver {
         }
     }
 
-    private List<Movie> getUpcomingMovieList(Context context) {
-        SettingPresenter settingPresenter = new SettingPresenter(context.getString(R.string.set_language));
-        return settingPresenter.getUpcomingMovie();
-    }
-
     public void cancelReminder(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(getPendingIntent(context));
@@ -108,5 +100,20 @@ public class UpcomingReminder extends BroadcastReceiver {
     private static PendingIntent getPendingIntent(Context context) {
         Intent intent = new Intent(context, DailyReminder.class);
         return PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+
+    @Override
+    public void getUpcomingMovieList(Context context, List<Movie> movies) {
+        int notificationId = 1;
+
+        upcomingMovieList.clear();
+        upcomingMovieList.addAll(movies);
+
+        for (Movie movie : upcomingMovieList) {
+            if (movie.getReleaseDate().equals(DateUtils.getCurrentDate())) {
+                showReminderNotification(context, movie.getTitle(), notificationId);
+                notificationId++;
+            }
+        }
     }
 }
