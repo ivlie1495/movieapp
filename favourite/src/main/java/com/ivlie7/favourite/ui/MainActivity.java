@@ -48,12 +48,7 @@ public class MainActivity extends AppCompatActivity implements MovieCallback {
         movieAdapter = new MovieAdapter(this);
         recyclerView.setAdapter(movieAdapter);
 
-        HandlerThread handlerThread = new HandlerThread("DataObserver");
-        handlerThread.start();
-        Handler handler = new Handler(handlerThread.getLooper());
-        DataObserver myObserver = new DataObserver(handler, this);
-        getContentResolver().registerContentObserver(CONTENT_URI, true, myObserver);
-        new getData(this, this).execute();
+        getMovieList();
     }
 
     @Override
@@ -103,5 +98,14 @@ public class MainActivity extends AppCompatActivity implements MovieCallback {
             super.onChange(selfChange);
             new getData(context, (MainActivity) context).execute();
         }
+    }
+
+    public void getMovieList() {
+        HandlerThread handlerThread = new HandlerThread("DataObserver");
+        handlerThread.start();
+        Handler handler = new Handler(handlerThread.getLooper());
+        DataObserver myObserver = new DataObserver(handler, this);
+        getContentResolver().registerContentObserver(CONTENT_URI, true, myObserver);
+        new getData(this, this).execute();
     }
 }
