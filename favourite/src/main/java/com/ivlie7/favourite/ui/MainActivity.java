@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements MovieCallback {
             movieList = movies;
             movieAdapter.setMovies(movies);
         } else {
-            Toast.makeText(this, "Tidak Ada Data Saat Ini", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.data_not_found), Toast.LENGTH_SHORT).show();
             movieAdapter.setMovies(movieList);
         }
         progressBar.setVisibility(View.INVISIBLE);
