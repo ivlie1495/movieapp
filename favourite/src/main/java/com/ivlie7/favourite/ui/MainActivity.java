@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements MovieCallback {
     RecyclerView recyclerView;
 
     private MovieAdapter movieAdapter;
-    private List<Movie> movieList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +54,9 @@ public class MainActivity extends AppCompatActivity implements MovieCallback {
     public void postExecute(Cursor cursor) {
         List<Movie> movies = mapCursorToArrayList(cursor);
         if (movies.size() > 0) {
-            movieList = movies;
             movieAdapter.setMovies(movies);
         } else {
             Toast.makeText(this, getString(R.string.data_not_found), Toast.LENGTH_SHORT).show();
-            movieAdapter.setMovies(movieList);
         }
         progressBar.setVisibility(View.INVISIBLE);
     }
