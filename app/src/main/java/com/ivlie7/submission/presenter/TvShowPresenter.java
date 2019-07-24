@@ -1,7 +1,8 @@
 package com.ivlie7.submission.presenter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.ivlie7.submission.config.ApiConfig;
 import com.ivlie7.submission.config.RoomConfig;

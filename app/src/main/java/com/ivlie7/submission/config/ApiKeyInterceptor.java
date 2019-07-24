@@ -1,6 +1,6 @@
 package com.ivlie7.submission.config;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ivlie7.submission.constant.ApiConstants;
 

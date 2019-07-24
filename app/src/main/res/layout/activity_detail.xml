@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.DetailActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ivMovie"
         style="@style/ConfigWidthHeight"
         android:layout_height="wrap_content"
@@ -88,6 +88,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageViewBackdropDetail" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

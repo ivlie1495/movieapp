@@ -1,8 +1,9 @@
 package com.ivlie7.submission.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.fragment.FragmentSetting;

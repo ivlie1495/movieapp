@@ -3,8 +3,9 @@ package com.ivlie7.submission.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.service.reminder.DailyReminder;
@@ -24,11 +25,8 @@ public class FragmentSetting extends PreferenceFragmentCompat implements Prefere
     @BindString(R.string.upcoming_reminder_key)
     String upcomingReminderKey;
 
-//    private SettingPresenter settingPresenter;
     private UpcomingReminder upcomingReminder;
     private DailyReminder dailyReminder;
-
-//    private List<Movie> movies = new ArrayList<>();
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
@@ -47,22 +45,8 @@ public class FragmentSetting extends PreferenceFragmentCompat implements Prefere
             findPreference(dailyReminderKey).setOnPreferenceChangeListener(this);
             findPreference(upcomingReminderKey).setOnPreferenceChangeListener(this);
             findPreference(settingLocaleKey).setOnPreferenceClickListener(this);
-
-//            settingPresenter = new SettingPresenter(this, getString(R.string.set_language));
         }
     }
-
-//    @Override
-//    public void setReminder(Movie movie) {
-//        movies.clear();
-//        movies.add(movie);
-//        upcomingReminder.setRepeatReminder(getContext(), movies);
-//    }
-//
-//    @Override
-//    public void cancelReminder() {
-//        upcomingReminder.cancelReminder(getContext());
-//    }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {

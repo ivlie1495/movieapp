@@ -1,12 +1,14 @@
 package com.ivlie7.submission.ui;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.MenuItem;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ivlie7.submission.R;
 import com.ivlie7.submission.adapter.ViewPagerAdapter;
 import com.ivlie7.submission.fragment.FragmentFavourite;
