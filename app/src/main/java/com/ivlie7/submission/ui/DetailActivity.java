@@ -61,21 +61,6 @@ public class DetailActivity extends AppCompatActivity {
         favouriteState();
     }
 
-    private void getDataDetail() {
-        if (movie != null || tvShow != null) {
-            textViewTitleDetail.setText(isMovie() ? movie.getTitle() : tvShow.getName());
-            textViewReleaseDetail.setText(isMovie() ? movie.getReleaseDate() : tvShow.getFirstAirDate());
-            textViewRatingDetail.setText(String.valueOf(isMovie() ? movie.getVoteAverage() : tvShow.getVoteAverage()));
-            textViewOverviewDetail.setText(isMovie() ? movie.getOverview() : tvShow.getOverview());
-            Glide.with(this)
-                    .load(ApiConstants.API_BACKDROP + (isMovie() ? movie.getBackdropPath() : tvShow.getBackdropPath()))
-                    .into(imageViewBackdropDetail);
-            Glide.with(this)
-                    .load(ApiConstants.API_POSTER + (isMovie() ? movie.getPosterPath() : tvShow.getPosterPath()))
-                    .into(imageViewPosterDetail);
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.favourite, menu);
@@ -96,6 +81,21 @@ public class DetailActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void getDataDetail() {
+        if (movie != null || tvShow != null) {
+            textViewTitleDetail.setText(isMovie() ? movie.getTitle() : tvShow.getName());
+            textViewReleaseDetail.setText(isMovie() ? movie.getReleaseDate() : tvShow.getFirstAirDate());
+            textViewRatingDetail.setText(String.valueOf(isMovie() ? movie.getVoteAverage() : tvShow.getVoteAverage()));
+            textViewOverviewDetail.setText(isMovie() ? movie.getOverview() : tvShow.getOverview());
+            Glide.with(this)
+                    .load(ApiConstants.API_BACKDROP + (isMovie() ? movie.getBackdropPath() : tvShow.getBackdropPath()))
+                    .into(imageViewBackdropDetail);
+            Glide.with(this)
+                    .load(ApiConstants.API_POSTER + (isMovie() ? movie.getPosterPath() : tvShow.getPosterPath()))
+                    .into(imageViewPosterDetail);
+        }
     }
 
     private void getDataFromIntent() {
