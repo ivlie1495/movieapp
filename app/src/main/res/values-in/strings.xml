@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="movie" translatable="false">Film</string>
-    <string name="tv_show" translatable="false">Serial Tv</string>
-    <string name="title" translatable="false">Judul</string>
-    <string name="release" translatable="false">Tanggal Rilis</string>
-    <string name="score" translatable="false">Nilai</string>
-    <string name="overview" translatable="false">Sinopsis</string>
-    <string name="set_language" translatable="false">in-ID</string>
-    <string name="data_not_found" translatable="false">Data Kosong!</string>
-    <string name="favourite" translatable="false">Favorit</string>
-    <string name="search" translatable="false">Cari</string>
-    <string name="no_favourite" translatable="false">Tidak Ada Favorit</string>
-    <string name="banner" translatable="false">Spanduk</string>
+    <string name="movie">Film</string>
+    <string name="tv_show">Serial Tv</string>
+    <string name="title">Judul</string>
+    <string name="release">Tanggal Rilis</string>
+    <string name="score">Nilai</string>
+    <string name="overview">Sinopsis</string>
+    <string name="set_language">in-ID</string>
+    <string name="data_not_found">Data Kosong!</string>
+    <string name="favourite">Favorit</string>
+    <string name="search">Cari</string>
+    <string name="no_favourite">Tidak Ada Favorit</string>
+    <string name="setting">Pengaturan</string>
+    <string name="banner">Spanduk</string>
 
-    <string name="action_setting" translatable="false">Pengaturan</string>
-    <string name="action_notification" translatable="false">notifikasi</string>
-    <string name="switch_daily_reminder" translatable="false">Nyalakan/Matikan Pengingat Harian</string>
-    <string name="daily_reminder" translatable="false">Pengingat Harian</string>
-    <string name="upcoming_reminder" translatable="false">Pengingat Film Terbaru</string>
-    <string name="switch_upcoming_reminder" translatable="false">Nyalakan/Matikan Pengingat Film Terbaru</string>
-    <string name="setting_locale" translatable="false">Pengaturan Bahasa</string>
-    <string name="localization_setting" translatable="false">Ubah Bahasa Ponsel Anda</string>
-    <string name="daily_reminder_message" translatable="false">Halo, ayo lihat ada film terbaru apa hari ini!</string>
-    <string name="upcoming_reminder_message" translatable="false">Halo, %s rilis hari ini!</string>
+    <string name="action_setting">Pengaturan</string>
+    <string name="action_notification">notifikasi</string>
+    <string name="switch_daily_reminder">Nyalakan/Matikan Pengingat Harian</string>
+    <string name="daily_reminder">Pengingat Harian</string>
+    <string name="upcoming_reminder">Pengingat Film Terbaru</string>
+    <string name="switch_upcoming_reminder">Nyalakan/Matikan Pengingat Film Terbaru</string>
+    <string name="setting_locale">Pengaturan Bahasa</string>
+    <string name="localization_setting">Ubah Bahasa Ponsel Anda</string>
+    <string name="daily_reminder_message">Halo, ayo lihat ada film terbaru apa hari ini!</string>
+    <string name="upcoming_reminder_message">Halo, %s rilis hari ini!</string>
 </resources>
