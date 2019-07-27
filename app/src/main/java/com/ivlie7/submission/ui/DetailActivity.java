@@ -1,6 +1,9 @@
 package com.ivlie7.submission.ui;
 
 import android.R.id;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +19,7 @@ import com.ivlie7.submission.config.RoomConfig;
 import com.ivlie7.submission.model.Movie;
 import com.ivlie7.submission.model.TvShow;
 import com.ivlie7.submission.constant.ApiConstants;
+import com.ivlie7.submission.service.widget.FavouriteWidget;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -124,6 +128,8 @@ public class DetailActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.add_to_favourite), Toast.LENGTH_SHORT).show();
         }
 
+        updateStackVWidget();
+
         isFavourite = !isFavourite;
     }
 
@@ -141,6 +147,14 @@ public class DetailActivity extends AppCompatActivity {
         } else {
             isFavourite = RoomConfig.getInstance(this).tvShowDao().findTvShowById(tvShow.getId()) != null;
         }
+    }
+
+    public void updateStackVWidget() {
+        Intent intent = new Intent(this, FavouriteWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds((new ComponentName(getApplication(), FavouriteWidget.class)));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        sendBroadcast(intent);
     }
 
     private boolean isMovie() {
