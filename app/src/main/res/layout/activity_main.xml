@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/layoutContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottomNavigation">
-
-    </FrameLayout>
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPagerBot"
         android:layout_width="match_parent"
