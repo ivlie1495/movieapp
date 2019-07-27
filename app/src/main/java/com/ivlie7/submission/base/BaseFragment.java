@@ -71,7 +71,7 @@ public class BaseFragment<T extends Parcelable> extends Fragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_change_settings) {
             Intent intent = new Intent(getContext(), SettingActivity.class);
             startActivity(intent);
