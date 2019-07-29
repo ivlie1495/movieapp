@@ -68,7 +68,7 @@ public class FragmentMovie extends BaseFragment<Movie> implements MovieView, Swi
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.action_menu, menu);
         setSearchView(menu);
