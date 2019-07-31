@@ -40,8 +40,6 @@ public class FragmentFavourite extends Fragment {
 
         tabLayoutFavourite.setupWithViewPager(viewPagerFavourite);
         setupViewPager(viewPagerFavourite);
-
-        setHasOptionsMenu(true);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -52,7 +50,7 @@ public class FragmentFavourite extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.setting_menu, menu);
     }
