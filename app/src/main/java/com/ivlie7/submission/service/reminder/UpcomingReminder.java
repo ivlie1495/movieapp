@@ -98,7 +98,7 @@ public class UpcomingReminder extends BroadcastReceiver implements SettingView {
     }
 
     private static PendingIntent getPendingIntent(Context context) {
-        Intent intent = new Intent(context, DailyReminder.class);
+        Intent intent = new Intent(context, UpcomingReminder.class);
         return PendingIntent.getBroadcast(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
