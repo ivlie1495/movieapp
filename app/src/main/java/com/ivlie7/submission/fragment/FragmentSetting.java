@@ -62,9 +62,7 @@ public class FragmentSetting extends PreferenceFragmentCompat implements Prefere
         } else {
             if (isOn) {
                 upcomingReminder.setRepeatReminder(getContext());
-//                settingPresenter.setReminder();
             } else {
-//                settingPresenter.cancelReminder();
                 upcomingReminder.cancelReminder(getContext());
             }
         }
