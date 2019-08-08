@@ -29,7 +29,7 @@ public class SettingPresenter {
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.body() != null) {
-                    settingView.getUpcomingMovieList(context, response.body().getGetMovieList());
+                    settingView.getUpcomingMovieList(context, response.body().getMovieList());
                 }
             }
 

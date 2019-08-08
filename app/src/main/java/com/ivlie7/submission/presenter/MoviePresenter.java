@@ -41,7 +41,7 @@ public class MoviePresenter {
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 movieView.hideLoading();
                 if (response.body() != null) {
-                    List<Movie> movieList = response.body().getGetMovieList();
+                    List<Movie> movieList = response.body().getMovieList();
                     movieView.getMovieList(movieList);
                 } else {
                     movieView.dataNotFound();
@@ -78,7 +78,7 @@ public class MoviePresenter {
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.body() != null) {
-                    List<Movie> movieList = response.body().getGetMovieList();
+                    List<Movie> movieList = response.body().getMovieList();
                     movieView.getMovieList(movieList);
                     movieView.hideLoading();
                 } else {
